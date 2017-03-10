@@ -1,0 +1,11 @@
+<h2>Login details: {{zaraza}} </h2>
+  <div>
+    <label>id: </label>{{user_id}}</div>
+    <label>login: {{seeduser?.login}}</label>
+  <div>
+    <input [(ngModel)]="seeduser.firstName" placeholder="firstName" />
+    <input [(ngModel)]="seeduser.lastName" placeholder="lastName" />
+   </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="reload()">Reload</button>
+  <button (click)="save()">Save</button>
