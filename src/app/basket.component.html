@@ -1,8 +1,33 @@
 <h3>Seedshop basket</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let anOrder of anOrders"><!--class="col-1-4" -->
-    <div class="anOrders">
-      <h4>Barcode: {{anOrder.barcode}}  Amount: {{anOrder.amount}}</h4>
-    </div>
-  </a>
-</div>
+  <table>
+    <tr>
+      <th>  Barcode  |</th>
+      <th>  Name  |</th>
+      <th>  Weight, g  |</th>
+      <th>  Amount  |</th>
+      <th>  Price, grn  |</th>
+      <th>  Quentity  |</th>
+      <th>  Summ  </th>
+    </tr>
+    <tr *ngFor="let basketItem of basketItems">
+        <th>  {{basketItem.product.barcode}}  </th>
+        <th>  {{basketItem.product.name}}  </th>
+        <th>  {{basketItem.product.weight}}  </th>
+        <th>  {{basketItem.product.amount}}  </th>
+        <th>  {{basketItem.product.price}}  </th>
+        <th>  {{basketItem.count}}</th>
+        <th>  {{multiply(basketItem.product.price,basketItem.count)}}</th>
+    </tr>
+    <tr></tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>{{this.countAll().toFixed(2)}}</th>
+    </tr>
+    </table>
+  </div>

@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { SeedAnOrderItem } from './SeedAnOrderItem';
+import { SeedBasketItem } from './SeedBasketItem';
 
 @Injectable()
 export class SeedBasketService {
@@ -15,13 +15,13 @@ export class SeedBasketService {
         private http: Http
   ) { }
 
-  getAnOrders(): Promise<SeedAnOrderItem[]> {
+  getAnOrders(): Promise<SeedBasketItem[]> {
     const url = `${this.basketUrl}/all/` + this.sessionId;
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{
                  console.log("basket JSON: "+JSON.stringify(response.json()));
-                 return Promise.resolve(response.json().orderItems as SeedAnOrderItem[]);
+                 return Promise.resolve(response.json().basketItems as SeedBasketItem[]);
                })
                .catch(this.handleError);
   }
