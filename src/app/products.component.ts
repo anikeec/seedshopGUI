@@ -28,4 +28,8 @@ export class ProductsComponent implements OnInit {
       else this.products[i].amount = products[i].amount;
     }
   }
+
+  add(product : SeedProduct): void {
+    this.seedproductService.create(product);
+  }
 }
