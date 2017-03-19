@@ -8,7 +8,7 @@ import { SeedUser } from './SeedUser';
 
 @Injectable()
 export class SeedUserService {
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
   private usersUrl = 'http://localhost:8080/users';  // URL to web api
   private token:string;
   constructor(
@@ -44,7 +44,7 @@ export class SeedUserService {
           let user: SeedUser;
           console.log("user JSON: "+JSON.stringify(response.json()));
           user = response.json().users[0];
-          console.log("User: "+user.login)
+          //console.log("User: "+user.login)
           return Promise.resolve(user);
         })
        .catch(

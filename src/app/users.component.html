@@ -11,14 +11,14 @@
       [class.selected]="user === selectedUser">
     <span>{{user.user_id}}</span>
     <span>{{user.login}}</span>
-    <span>{{user.firstName}} {{user.lastName}}</span>
+    <span>{{user.firstName}} {{user.secName}}</span>
     <button class="delete"
       (click)="delete(user); $event.stopPropagation()">x</button>
   </li>
 </ul>
 <div *ngIf="selectedUser">
   <h2>
-    {{selectedUser.firstName | uppercase}} {{selectedUser.lastName | uppercase}} is current user
+    {{selectedUser.firstName | uppercase}} {{selectedUser.secName | uppercase}} is current user
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

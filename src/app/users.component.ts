@@ -32,9 +32,9 @@ export class UsersComponent implements OnInit {
     }
 
     let user:SeedUser = new SeedUser();
-    user.login = name;
+    //user.login = name;
     user.email = email;
-    user.isLibrarian=false;
+    //user.isLibrarian=false;
 
     this.seeduserService.create(user)
       .then(user => {
@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
 
   delete(user: SeedUser): void {
     this.seeduserService
-        .delete(user.user_id)
+        .delete(user.userId)
         .then(() => {
           this.users = this.users.filter(h => h !== user);
           if (this.selectedUser === user) { this.selectedUser = null; }
@@ -61,6 +61,6 @@ export class UsersComponent implements OnInit {
   }
 
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedUser.user_id]);
+    this.router.navigate(['/detail', this.selectedUser.userId]);
   }
 }

@@ -1,8 +1,8 @@
 <h3>Seedshop users</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let user of users"  [routerLink]="['/detail', user.user_id]"  class="col-1-4">
+  <a *ngFor="let user of users"  class="col-1-4">
     <div class="users">
-      <h4>{{user.firstName}} {{user.lastName}}</h4>
+      <h4>{{user.firstName}} {{user.secName}}</h4>
     </div>
   </a>
 </div>
