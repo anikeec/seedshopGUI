@@ -12,7 +12,6 @@ export class SeedAnOrderItem{
       this.barcode = barcode;
       this.amount = amount;
       this.price = price;
-
     }
 }
 
