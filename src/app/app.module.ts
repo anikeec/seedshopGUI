@@ -14,6 +14,9 @@ import {BasketComponent} from './basket.component';
 import {SeedUserService} from './SeedUser.service';
 import {SeedProductService} from './SeedProduct.service';
 import {SeedBasketService} from "./SeedBasket.service";
+import {CheckoutComponent} from "./checkout.component";
+import {InvoiceComponent} from "./invoice.component";
+import {SeedInvoiceService} from "./SeedInvoice.service";
 
 @NgModule({
     declarations: [
@@ -21,7 +24,9 @@ import {SeedBasketService} from "./SeedBasket.service";
         UserDetailComponent,
         UsersComponent,
         ProductsComponent,
-        BasketComponent
+        BasketComponent,
+        CheckoutComponent,
+        InvoiceComponent
     ],
     imports: [
         BrowserModule,
@@ -34,7 +39,7 @@ import {SeedBasketService} from "./SeedBasket.service";
             storageType: 'localStorage'
         })
     ],
-    providers: [SeedUserService, SeedProductService, SeedBasketService],
+    providers: [SeedUserService, SeedProductService, SeedBasketService, SeedInvoiceService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

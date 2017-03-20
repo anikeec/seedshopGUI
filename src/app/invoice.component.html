@@ -1,0 +1,52 @@
+<h3>Seedshop invoices</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>OrderId</th>
+      <th>UserId</th>
+      <th>OrderDate</th>
+      <th>PaidDate</th>
+      <th>SentDate</th>
+      <th>FirstName</th>
+      <th>SecName</th>
+      <th>ThirdName</th>
+      <th>Discount</th>
+      <th>Pay</th>
+      <th>Phone</th>
+      <th>DeliveryId</th>
+      <th>DeliveryOff</th>
+      <th>Prepay</th>
+      <th>Declaration</th>
+      <th>SourceLid</th>
+      <th>DestLid</th>
+      <th>CurrLid</th>
+      <th>BackorderId</th>
+      <th>StatusId</th>
+    </tr>
+    <tr *ngFor="let inv of invoices">
+      <th>{{inv.orderId}}</th>
+      <th>{{inv.userId}}</th>
+      <th>{{inv.orderDate}}</th>
+      <th>{{inv.paidDate}}</th>
+      <th>{{inv.sentDate}}</th>
+      <th>{{inv.firstName}}</th>
+      <th>{{inv.secName}}</th>
+      <th>{{inv.thirdName}}</th>
+      <th>{{inv.discount}}</th>
+      <th>{{inv.pay}}</th>
+      <th>{{inv.phone}}</th>
+      <th>{{inv.delivery}}</th>
+      <th>{{inv.deliveryOffice}}</th>
+      <th>{{inv.prepayment}}</th>
+      <th>{{inv.declaration}}</th>
+      <th>{{inv.sourceL}}</th>
+      <th>{{inv.destL}}</th>
+      <th>{{inv.currL}}</th>
+      <th>{{inv.backorderId}}</th>
+      <th>{{inv.status}}</th>
+    </tr>
+    <tr>
+    </tr>
+    </table>
+  </div>
