@@ -1,6 +1,8 @@
 <h3>Seedshop products</h3>
+<br><a *ngIf="results.apiVer">API version: {{results.apiVer}}   </a>
+<a *ngIf="results.error_message">Error: {{results.error_message}}</a>
 <div class="grid grid-pad">
-  <a *ngFor="let product of products"  class="col-1-4">
+  <a *ngFor="let product of results.products"  class="col-1-4">
     <div>
       <h4>Barcode: {{product.barcode}} </h4>
       <h4>Name: {{product.name}} </h4>
@@ -12,3 +14,4 @@
     </div>
   </a>
 </div>
+

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { SeedProduct }        from './SeedProduct';
 import { SeedProductService } from './SeedProduct.service';
+import {SeedProductListReply} from "./SeedProductListReply";
 
 @Component({
   moduleId: module.id,
@@ -11,21 +12,26 @@ import { SeedProductService } from './SeedProduct.service';
 })
 
 export class ProductsComponent implements OnInit {
-  products: SeedProduct[] = [];
+  results: SeedProductListReply = new SeedProductListReply();
 
   constructor(private seedproductService: SeedProductService) { }
 
   ngOnInit(): void {
     this.seedproductService.getProducts()
-      .then(products => this.products = products).then(products => this.checkProducts(this.products));//products => this.products = products
+      .then(ret => {
+        this.results = ret;
+        this.checkProducts(this.results);
+      }).catch(error => {
+    });
   }
 
-  checkProducts (products: SeedProduct[]){
+  checkProducts (prod: SeedProductListReply){
+    let products: SeedProduct[] = prod.products;
     for(var i = 0; i < products.length; i++) {
-      if(products[i].weight == "null") this.products[i].weight = "0";
-      else this.products[i].weight = products[i].weight;
-      if(products[i].amount.toString() == "null") this.products[i].amount = 0;
-      else this.products[i].amount = products[i].amount;
+      if(products[i].weight == "null") products[i].weight = "0";
+      else products[i].weight = products[i].weight;
+      if(products[i].amount.toString() == "null") products[i].amount = 0;
+      else products[i].amount = products[i].amount;
     }
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SeedInvoiceService} from "./SeedInvoice.service";
 import {SeedInvoice} from "./SeedInvoice";
+import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 
 
 @Component({
@@ -10,6 +11,8 @@ import {SeedInvoice} from "./SeedInvoice";
   styleUrls: [ './checkout.component.css' ]
 })
 export class CheckoutComponent implements OnInit {
+
+  results: SeedInvoiceListReply = new SeedInvoiceListReply();
 
   constructor( private seedinvoiceService: SeedInvoiceService) { }
 
@@ -43,7 +46,13 @@ export class CheckoutComponent implements OnInit {
     invoice.delivery = deliveryService;
     invoice.deliveryOffice = deliveryOffice;
 
-    this.seedinvoiceService.create(invoice);
+    this.seedinvoiceService.create(invoice)
+      .then(ret => {
+      this.results = ret;
+      })
+      .catch(error => {
+      }
+    );
   }
 
 }

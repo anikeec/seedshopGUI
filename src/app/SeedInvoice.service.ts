@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import {SeedInvoice} from "./SeedInvoice";
 import {SeedAddInvoiceQuery} from "./SeedAddInvoiceQuery";
+import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 
 @Injectable()
 export class SeedInvoiceService {
@@ -26,7 +27,7 @@ export class SeedInvoiceService {
                .catch(this.handleError);
   }
 
-  create(invoice:  SeedInvoice): Promise<SeedAddInvoiceQuery> {
+  create(invoice:  SeedInvoice): Promise<SeedInvoiceListReply> {
     const url = `${this.invoiceUrl}/checkout`;
 
     let mess : SeedAddInvoiceQuery = new SeedAddInvoiceQuery("1234567890",invoice);
@@ -35,7 +36,8 @@ export class SeedInvoiceService {
       .toPromise()
       .then(response =>{
         console.log("update invoice JSON: "+JSON.stringify(response.json()));
-        //response.json().users[0] as SeedUser;
+        let ret = Promise.resolve(response.json() as SeedInvoiceListReply);
+        return ret;
       })
       .catch(this.handleError);
   }

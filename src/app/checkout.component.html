@@ -1,4 +1,6 @@
 <h3>Seedshop checkout</h3>
+<br><a *ngIf="results.error_message">API version: {{results.apiVer}}</a>
+<br><br><a *ngIf="results.error_message">Error: {{results.error_message}}</a>
 <div class="grid grid-pad">
   <form class="checkout_form" action="add.html" method="post" name="checkout_form"><!--onsubmit="return validate()"-->
     <ul>

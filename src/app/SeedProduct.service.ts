@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { SeedProduct } from './SeedProduct';
 import { SeedAddBasketQuery } from './SeedAddBasketQuery';
 import { SeedAnOrderItem } from './SeedAnOrderItem';
+import {SeedProductListReply} from "./SeedProductListReply";
 
 @Injectable()
 export class SeedProductService {
@@ -19,13 +20,14 @@ export class SeedProductService {
         private localStService: LocalStorageService
   ) { }
 
-  getProducts(): Promise<SeedProduct[]> {
+  getProducts(): Promise<SeedProductListReply> {
     const url = `${this.productsUrl}/all`;
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{
                  console.log("product JSON: "+JSON.stringify(response.json()));
-                 return Promise.resolve(response.json().products as SeedProduct[]);
+                 let ret = Promise.resolve(response.json() as SeedProductListReply);
+                 return ret;
                })
                .catch(this.handleError);
   }

@@ -1,3 +1,5 @@
+import {SeedGenericReply} from "./SeedGenericReply";
+
 export class SeedInvoice{
    orderId: number;
    userId: number;
