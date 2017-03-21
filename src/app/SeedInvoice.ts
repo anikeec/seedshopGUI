@@ -11,6 +11,10 @@ export class SeedInvoice{
    thirdName: String;
    phone: String;
    declaration: String;
+   country: String;
+   region: String;
+   area: String;
+   city: String;
    delivery: number;
    deliveryOffice: number;
    prepayment: String;

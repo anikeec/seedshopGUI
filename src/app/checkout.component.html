@@ -60,7 +60,8 @@
       </li>
       <li>
         <label for="deliveryOffice">Delivery office:</label>
-        <input type="text" name="deliveryOffice" #deliveryOffice placeholder="3">
+        <input type="text" name="deliveryOffice" #deliveryOffice placeholder="3"
+               pattern="[0-9]{1,}">
       </li>
       <li>
         <button class="submit" type="submit"
@@ -68,6 +69,7 @@
                                       firstName.value,
                                       thirdName.value,
                                       email.value,
+                                      phone.value,
                                       country.value,
                                       region.value,
                                       area.value,
