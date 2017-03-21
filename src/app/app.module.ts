@@ -11,7 +11,7 @@ import {ProductsComponent} from './products.component';
 import {UsersComponent} from './users.component';
 import {UserDetailComponent} from './user-detail.component';
 import {BasketComponent} from './basket.component';
-import {SeedUserService} from './user.service';
+import {SeedUserService} from './users.service';
 import {SeedProductService} from './products.service';
 import {SeedBasketService} from "./basket.service";
 import {CheckoutComponent} from "./checkout.component";
