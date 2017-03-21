@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SeedBasketService } from './SeedBasket.service';
+import { SeedBasketService } from './basket.service';
 import { SeedBasketItem } from './SeedBasketItem';
 
 @Component({

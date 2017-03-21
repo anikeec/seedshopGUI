@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SeedProduct }        from './SeedProduct';
-import { SeedProductService } from './SeedProduct.service';
+import { SeedProductService } from './products.service';
 import {SeedProductListReply} from "./SeedProductListReply";
 
 @Component({

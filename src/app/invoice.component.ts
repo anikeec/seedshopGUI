@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {SeedInvoiceService} from "./SeedInvoice.service";
+import {SeedInvoiceService} from "./invoice.service";
 import {SeedInvoice} from "./SeedInvoice";
 
 @Component({

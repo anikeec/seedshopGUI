@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
 import { SeedUser }        from './SeedUser';
-import { SeedUserService } from './SeedUser.service';
+import { SeedUserService } from './user.service';
 @Component({
   moduleId: module.id,
   selector: 'user-detail',

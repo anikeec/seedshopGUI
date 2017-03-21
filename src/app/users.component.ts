@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
 import { SeedUser }                from './SeedUser';
-import { SeedUserService }         from './SeedUser.service';
+import { SeedUserService }         from './user.service';
 
 @Component({
   moduleId: module.id,

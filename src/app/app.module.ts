@@ -11,12 +11,12 @@ import {ProductsComponent} from './products.component';
 import {UsersComponent} from './users.component';
 import {UserDetailComponent} from './user-detail.component';
 import {BasketComponent} from './basket.component';
-import {SeedUserService} from './SeedUser.service';
-import {SeedProductService} from './SeedProduct.service';
-import {SeedBasketService} from "./SeedBasket.service";
+import {SeedUserService} from './user.service';
+import {SeedProductService} from './products.service';
+import {SeedBasketService} from "./basket.service";
 import {CheckoutComponent} from "./checkout.component";
 import {InvoiceComponent} from "./invoice.component";
-import {SeedInvoiceService} from "./SeedInvoice.service";
+import {SeedInvoiceService} from "./invoice.service";
 import {CheckoutResultComponent} from "./checkoutResult.component";
 
 @NgModule({
