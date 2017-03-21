@@ -1,9 +1,10 @@
 export class SeedUser{
     userId: number;
+    login: string;
     secName: string;
     firstName: string;
     thirdName: string;
-    genderId: number;
+    gender: string;
     email: string;
     phones: string;
     discount: string;
@@ -12,6 +13,8 @@ export class SeedUser{
     region: string;
     area: string;
     city: string;
+    temp: string;
+    used: string;
 }
 
 

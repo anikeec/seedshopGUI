@@ -1,24 +1,43 @@
 <h2>Seedshop users</h2>
 <div>
-  <label>User login:</label> <input #userName />
-  <label>User e-mail:</label> <input #userEmail />
-  <button (click)="add(userName.value, userEmail.value); userName.value=''; userEmail.value=''">
-    Add
-  </button>
-</div>
-<ul class="users">
-  <li *ngFor="let user of users" (click)="onSelect(user)"
-      [class.selected]="user === selectedUser">
-    <span>{{user.user_id}}</span>
-    <span>{{user.login}}</span>
-    <span>{{user.firstName}} {{user.secName}}</span>
-    <button class="delete"
-      (click)="delete(user); $event.stopPropagation()">x</button>
-  </li>
-</ul>
-<div *ngIf="selectedUser">
-  <h2>
-    {{selectedUser.firstName | uppercase}} {{selectedUser.secName | uppercase}} is current user
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>UserId</th>
+      <th>Login</th>
+      <th>FirstName</th>
+      <th>SecName</th>
+      <th>ThirdName</th>
+      <th>GenderId</th>
+      <th>Email</th>
+      <th>Phones</th>
+      <th>Discount</th>
+      <th>Birthday</th>
+      <th>Country</th>
+      <th>Region</th>
+      <th>Area</th>
+      <th>City</th>
+      <th>Temp</th>
+      <th>Used</th>
+    </tr>
+    <tr *ngFor="let user of results.users">
+      <th>{{user.userId}}</th>
+      <th>{{user.login}}</th>
+      <th>{{user.firstName}}</th>
+      <th>{{user.secName}}</th>
+      <th>{{user.thirdName}}</th>
+      <th>{{user.gender}}</th>
+      <th>{{user.email}}</th>
+      <th>{{user.phones}}</th>
+      <th>{{user.discount}}</th>
+      <th>{{user.birthday}}</th>
+      <th>{{user.country}}</th>
+      <th>{{user.region}}</th>
+      <th>{{user.area}}</th>
+      <th>{{user.city}}</th>
+      <th>{{user.temp}}</th>
+      <th>{{user.used}}</th>
+    </tr>
+    <tr>
+    </tr>
+  </table>
 </div>

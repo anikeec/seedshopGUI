@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
 
-import { SeedUser }                from './SeedUser';
 import { SeedUserService }         from './users.service';
+import {SeedUserListReply} from "./SeedUserListReply";
 
 @Component({
   moduleId: module.id,
@@ -11,56 +10,20 @@ import { SeedUserService }         from './users.service';
   styleUrls: [ './users.component.css' ]
 })
 export class UsersComponent implements OnInit {
-  users: SeedUser[];
-  selectedUser: SeedUser;
 
-  constructor(
-    private seeduserService: SeedUserService,
-    private router: Router) { }
+  results: SeedUserListReply = new SeedUserListReply();
 
-  getUsers(): void {
-    this.seeduserService
-        .getUsers()
-        .then(users => this.users = users);
-  }
-
-  add(name: string, email:string): void {
-    name = name.trim();
-    email = email.trim();
-    if (!name || !email) {
-      return;
-    }
-
-    let user:SeedUser = new SeedUser();
-    //user.login = name;
-    user.email = email;
-    //user.isLibrarian=false;
-
-    this.seeduserService.create(user)
-      .then(user => {
-        this.users.push(user);
-        this.selectedUser = null;
-      });
-  }
-
-  delete(user: SeedUser): void {
-    this.seeduserService
-        .delete(user.userId)
-        .then(() => {
-          this.users = this.users.filter(h => h !== user);
-          if (this.selectedUser === user) { this.selectedUser = null; }
-        });
-  }
+  constructor(private seeduserService: SeedUserService) { }
 
   ngOnInit(): void {
-    this.getUsers();
-  }
+    this.seeduserService.getUsers()
+      .then(ret => {
+        this.results = ret;
+        if(ret.retcode == 0) {
 
-  onSelect(user: SeedUser): void {
-    this.selectedUser = user;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedUser.userId]);
+        }})
+      .catch(error => {
+        }
+      );
   }
 }

@@ -9,7 +9,6 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ProductsComponent} from './products.component';
 import {UsersComponent} from './users.component';
-import {UserDetailComponent} from './user-detail.component';
 import {BasketComponent} from './basket.component';
 import {SeedUserService} from './users.service';
 import {SeedProductService} from './products.service';
@@ -22,7 +21,6 @@ import {CheckoutResultComponent} from "./checkoutResult.component";
 @NgModule({
     declarations: [
         AppComponent,
-        UserDetailComponent,
         UsersComponent,
         ProductsComponent,
         BasketComponent,
