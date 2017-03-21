@@ -17,6 +17,7 @@ import {SeedBasketService} from "./SeedBasket.service";
 import {CheckoutComponent} from "./checkout.component";
 import {InvoiceComponent} from "./invoice.component";
 import {SeedInvoiceService} from "./SeedInvoice.service";
+import {CheckoutResultComponent} from "./checkoutResult.component";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {SeedInvoiceService} from "./SeedInvoice.service";
         ProductsComponent,
         BasketComponent,
         CheckoutComponent,
-        InvoiceComponent
+        InvoiceComponent,
+        CheckoutResultComponent
     ],
     imports: [
         BrowserModule,

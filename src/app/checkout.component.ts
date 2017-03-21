@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SeedInvoiceService} from "./SeedInvoice.service";
 import {SeedInvoice} from "./SeedInvoice";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class CheckoutComponent implements OnInit {
 
   results: SeedInvoiceListReply = new SeedInvoiceListReply();
 
-  constructor( private seedinvoiceService: SeedInvoiceService) { }
+  constructor( private seedinvoiceService: SeedInvoiceService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -49,7 +50,10 @@ export class CheckoutComponent implements OnInit {
     this.seedinvoiceService.create(invoice)
       .then(ret => {
       this.results = ret;
-      })
+      if(ret.retcode == 0) {
+        this.router.navigate(['/checkoutResult']);
+
+      }})
       .catch(error => {
       }
     );

@@ -1,0 +1,97 @@
+[class*='col-'] {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+[class*='col-']:last-of-type {
+  padding-right: 0;
+}
+a {
+  text-decoration: none;
+}
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+h3 {
+  text-align: center; margin-bottom: 0;
+}
+h4 {
+  position: relative;
+}
+.grid {
+  margin: 0;
+}
+.col-1-4 {
+  width: 25%;
+}
+.module {
+  padding: 20px;
+  text-align: center;
+  color: #eee;
+  max-height: 120px;
+  min-width: 120px;
+  background-color: #607D8B;
+  border-radius: 2px;
+}
+.module:hover {
+  background-color: #EEE;
+  cursor: pointer;
+  color: #607d8b;
+}
+.grid-pad {
+  padding: 10px 0;
+}
+.grid-pad > [class*='col-']:last-of-type {
+  padding-right: 20px;
+}
+@media (max-width: 600px) {
+  .module {
+    font-size: 10px;
+    max-height: 75px; }
+}
+@media (max-width: 1024px) {
+  .grid {
+    margin: 0;
+  }
+  .module {
+    min-width: 60px;
+  }
+}
+
+/* === Remove input autofocus webkit === */
+*:focus {outline: none;}
+
+body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;}
+.checkout_form h2, .checkout_form label {font-family:Georgia, Times, "Times New Roman", serif;}
+.form_hint, .required_notification {font-size: 11px;}
+
+/* === List Styles === */
+.checkout_form ul {
+  width:750px;
+  list-style-type:none;
+  list-style-position:outside;
+  margin:0px;
+  padding:0px;
+}
+.checkout_form li{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  position:relative;
+}
+.checkout_form li:first-child, .checkout_form li:last-child {
+  border-bottom:1px solid #777;
+}
+
+/* === Form Header === */
+.checkout_form h2 {
+  margin:0;
+  display: inline;
+}
+.required_notification {
+  color:#d45252;
+  margin:5px 0 0 0;
+  display:inline;
+  float:right;
+}
