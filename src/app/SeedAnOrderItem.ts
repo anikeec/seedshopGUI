@@ -1,10 +1,10 @@
 export class SeedAnOrderItem{
-    id: number;
+    id: string;
     barcode: string;
     amount: number;
     price: string;
 
-    constructor ( id: number,
+    constructor ( id: string,
                   barcode: string,
                   amount: number,
                   price: string){

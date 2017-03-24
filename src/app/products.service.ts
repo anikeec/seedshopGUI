@@ -34,7 +34,7 @@ export class SeedProductService {
 
   create(product:  SeedProduct): Promise<SeedAddBasketQuery> {
     const url = `${this.basketUrl}/add`;
-    let item : SeedAnOrderItem = new SeedAnOrderItem(1,product.barcode,1,"0");
+    let item : SeedAnOrderItem = new SeedAnOrderItem("1",product.barcode,1,"0");
     let items : SeedAnOrderItem[] = [];
     let basket = new SeedAddBasketQuery("1234567890",items);
     basket.products.push(item);

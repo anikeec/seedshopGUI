@@ -70,8 +70,8 @@ export class InvoiceDetailComponent implements OnInit {
 
   }
 
-  sendInvoiceDetail(orderId: number,
-                    userId: number,
+  sendInvoiceDetail(orderId: string,
+                    userId: string,
                     orderDate: String,
                     paidDate: String,
                     sentDate: String,
@@ -93,7 +93,7 @@ export class InvoiceDetailComponent implements OnInit {
                     sourceL: number,
                     destL: number,
                     currL: number,
-                    backorderId: number,
+                    backorderId: string,
                     addInfoU: String,
                     addInfoM: String):void{
     if(secName.length >20)

@@ -1,6 +1,6 @@
 export class SeedInvoice{
-   orderId: number;
-   userId: number;
+   orderId: string;
+   userId: string;
    orderDate: String;
    paidDate: String;
    sentDate: String;
@@ -22,7 +22,7 @@ export class SeedInvoice{
    sourceL: number;
    destL: number;
    currL: number;
-   backorderId: number;
+   backorderId: string;
    addInfoU: String;
    addInfoM: String;
 

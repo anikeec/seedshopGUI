@@ -49,7 +49,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   sendUserDetail(
-              userId:number,
+              userId:string,
               login:string,
               secName:string,
               firstName:string,

@@ -1,7 +1,7 @@
 import { SeedProduct }        from './SeedProduct';
 
 export class SeedBasketItem{
-    orderId: number;
+    orderId: string;
     count: number;
     product: SeedProduct;
 }

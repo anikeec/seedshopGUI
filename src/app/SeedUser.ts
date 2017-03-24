@@ -1,5 +1,5 @@
 export class SeedUser{
-    userId: number;
+    userId: string;
     login: string;
     role: string;
     secName: string;
