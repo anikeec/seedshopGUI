@@ -25,6 +25,18 @@ export class SeedUserService {
       .catch(this.handleError);
   }
 
+  getUser(id: number): Promise<SeedUserListReply> {
+    const url = `${this.usersUrl}/byid/${id}`;
+    return this.http.get(url,{headers: this.headers})
+      .toPromise()
+      .then(response =>{
+        console.log("get user JSON: "+JSON.stringify(response.json()));
+        let ret = Promise.resolve(response.json() as SeedUserListReply);
+        return ret;
+      })
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

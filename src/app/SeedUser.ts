@@ -1,6 +1,7 @@
 export class SeedUser{
     userId: number;
     login: string;
+    role: string;
     secName: string;
     firstName: string;
     thirdName: string;

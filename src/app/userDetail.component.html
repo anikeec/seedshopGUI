@@ -1,0 +1,122 @@
+<h3>Seedshop userDetail</h3>
+<br>API version: {{results.apiVer}}
+<br><br><a *ngIf="results.error_message">Error: {{results.error_message}}</a>
+<div class="grid grid-pad">
+  <a  *ngFor="let user of results.users">
+  <form class="checkout_form" action="add.html" method="post" name="checkout_form"><!--onsubmit="return validate()"-->
+    <ul>
+      <li>
+        <h2>User data</h2>
+        <span class="required_notification">* Fill Required Field</span>
+      </li>
+      <li>
+        <label for="userId">User id:</label>
+        <input type="text" name="userId" #userId disabled=true value="{{results.users[0].userId}}">
+      </li>
+      <li>
+        <label for="login">Login:</label>
+        <input type="text" name="login" #login placeholder=""
+               pattern="[A-Za-z0-9]{2,}" required="" value="{{user.login}}" >
+      </li>
+      <li>
+        <label for="secname">Surname:</label>
+        <input type="text" name="secName" #secName
+               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{user.secName}}">
+      </li>
+      <li>
+        <label for="firstName">Name:</label>
+        <input type="text" name="firstName" #firstName
+               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{user.firstName}}">
+      </li>
+      <li>
+        <label for="thirdName">Third name:</label>
+        <input type="text" name="thirdName" #thirdName
+               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{user.thirdName}}">
+      </li>
+      <li>
+        <label for="gender">Gender:</label>
+        <select #gender>
+          <option value="0">M</option>
+          <option value="1">F</option>
+          <option value="2">U</option>
+        </select>
+      </li>
+      <li>
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" #email
+               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"  required=""
+               value="{{user.email}}">
+        <span class="form_hint">Proper format "mailbox@ukr.net"</span>
+      </li>
+      <li>
+        <label for="phones">Mobile phones:</label>
+        <input type="text" name="phones" #phone
+               pattern="\+380\d{9}" required=""  value="{{user.phones}}">
+        <span class="form_hint">Proper format "+380631234567"</span>
+      </li>
+      <li>
+        <label for="discount">Discount:</label>
+        <input type="text" name="discount" #discount
+               pattern="d{1,2}\.\d{1,2}" required=""  value="{{user.discount}}">
+      </li>
+      <li>
+        <label for="birthday">Birthday:</label>
+        <input type="text" name="birthday" #birthday
+               pattern="d{1,2}\-\d{1,2}\-\d{2,4}" required=""  value="{{user.birthday}}">
+        <span class="form_hint">Proper format "31-02-1973"</span>
+      </li>
+      <li>
+        <label for="country">Country:</label>
+        <input type="text" name="country" #country placeholder="Ukraine"
+               pattern="[A-Za-zА-Яа-яЁё]{2,}" required=""  value="{{user.country}}">
+      </li>
+      <li>
+        <label for="region">Region:</label>
+        <input type="text" name="region" #region value="{{user.region}}">
+      </li>
+      <li>
+        <label for="area">Area:</label>
+        <input type="text" name="area" #area  value="{{user.area}}">
+      </li>
+      <li>
+        <label for="city">City:</label>
+        <input type="text" name="city" #city  value="{{user.city}}"
+               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+      </li>
+      <li>
+        <label for="temp">Temporary:</label>
+        <select #temp *ngFor="let user of results.users">
+          <option *ngFor="let user of results.users" [ngValue]="user.temp" [selected]="user.temp === 'true'">{{user.temp}}</option>
+        </select>
+      </li>
+      <li>
+        <label for="used">Used:</label>
+        <select #used>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </li>
+      <li>
+        <button class="submit" type="submit"
+                (click)="sendUserDetail(userId.value,
+                                        login.value,
+                                        secName.value,
+                                        firstName.value,
+                                        thirdName.value,
+                                        gender.value,
+                                        email.value,
+                                        phones.value,
+                                        discount.value,
+                                        birthday.value,
+                                        country.value,
+                                        region.value,
+                                        area.value,
+                                        city.value,
+                                        temp.value,
+                                        used.value);"
+        >Save changes</button>
+      </li>
+    </ul>
+  </form>
+  </a>
+</div>

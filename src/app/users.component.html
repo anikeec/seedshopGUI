@@ -4,6 +4,7 @@
     <tr>
       <th>UserId</th>
       <th>Login</th>
+      <th>Role</th>
       <th>FirstName</th>
       <th>SecName</th>
       <th>ThirdName</th>
@@ -18,10 +19,12 @@
       <th>City</th>
       <th>Temp</th>
       <th>Used</th>
+      <th>Edit</th>
     </tr>
     <tr *ngFor="let user of results.users">
       <th>{{user.userId}}</th>
       <th>{{user.login}}</th>
+      <th>{{user.role}}</th>
       <th>{{user.firstName}}</th>
       <th>{{user.secName}}</th>
       <th>{{user.thirdName}}</th>
@@ -36,6 +39,7 @@
       <th>{{user.city}}</th>
       <th>{{user.temp}}</th>
       <th>{{user.used}}</th>
+      <th><button (click)="gotoEdit(user.userId)">Edit</button></th>
     </tr>
     <tr>
     </tr>
