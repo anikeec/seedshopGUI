@@ -120,19 +120,19 @@
       <li>
         <label for="sourceL">sourceL:</label>
         <select #sourceL name="sourceL">
-          <option value="true">1</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.sourceL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="destL">destL:</label>
         <select #destL name="destL">
-          <option value="true">1</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.destL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="currL">currL:</label>
         <select #currL name="currL">
-          <option value="true">1</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.currL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>

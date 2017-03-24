@@ -4,6 +4,8 @@ import {SeedInvoice} from "./SeedInvoice";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 import {SeedInvoiceService} from "./invoice.service";
 import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
+import {SeedLocationService} from "./location.service";
+import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 
 
 @Component({
@@ -16,10 +18,12 @@ export class InvoiceDetailComponent implements OnInit {
 
   results: SeedInvoiceListReply = new SeedInvoiceListReply();
   deliveryStatuses: SeedDeliveryStatusListReply = new SeedDeliveryStatusListReply();
+  productLocations: SeedProductLocationListReply = new SeedProductLocationListReply();
   //invoice: SeedInvoice = new SeedInvoice();
   invoiceId: number = 0;
 
   constructor( private invoiceService: SeedInvoiceService,
+               private locationService: SeedLocationService,
                private route: ActivatedRoute,
                private router: Router) {
 
@@ -36,6 +40,13 @@ export class InvoiceDetailComponent implements OnInit {
             .then(
               dstatuses => {
                 this.deliveryStatuses = dstatuses;
+                return this.locationService.getProductLocations();
+              }
+            )
+
+            .then(
+              retPlocations => {
+                this.productLocations = retPlocations;
                 return this.invoiceService.getInvoice(this.invoiceId);
               }
             )
