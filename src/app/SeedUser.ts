@@ -5,7 +5,7 @@ export class SeedUser{
     secName: string;
     firstName: string;
     thirdName: string;
-    gender: string;
+    genderId: number;
     email: string;
     phones: string;
     discount: string;

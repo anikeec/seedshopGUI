@@ -3,6 +3,7 @@ import {Router, Params, ActivatedRoute} from "@angular/router";
 import {SeedUser} from "./SeedUser";
 import {SeedUserService} from "./users.service";
 import {SeedUserListReply} from "./SeedUserListReply";
+import {SeedUserGenderListReply} from "./SeedUserGenderListReply";
 
 
 @Component({
@@ -14,6 +15,7 @@ import {SeedUserListReply} from "./SeedUserListReply";
 export class UserDetailComponent implements OnInit {
 
   results: SeedUserListReply = new SeedUserListReply();
+  ugenders: SeedUserGenderListReply = new SeedUserGenderListReply();
   user: SeedUser = new SeedUser();
   userId: number = 0;
 
@@ -25,19 +27,25 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .subscribe((params: Params)=>{
+      .subscribe((params: Params)=> {
           this.userId = params['id'];
-          console.log("PARAMS ID: " + this.userId+"<<");
-          this.usersService.getUser(this.userId)
-            .then(ret => {
-                this.results = ret;
-                //this.user = ret.users[0];
+          console.log("PARAMS ID: " + this.userId + "<<");
 
-                //this.user_id = ret.users[0].userId;
+          this.usersService.getUserGenders()
+
+            .then(
+              ret => {
+                this.ugenders = ret;
+                return this.usersService.getUser(this.userId);
               }
             )
-        }
-      )
+
+            .then(ret => {
+                this.results = ret;
+              }
+            )
+      })
+
   }
 
   sendUserDetail(
@@ -46,7 +54,7 @@ export class UserDetailComponent implements OnInit {
               secName:string,
               firstName:string,
               thirdName:string,
-              gender: string,
+              genderId: number,
               email: string,
               phones: string,
               discount: string,
@@ -66,7 +74,7 @@ export class UserDetailComponent implements OnInit {
     user.secName = secName;
     user.firstName = firstName;
     user.thirdName = thirdName;
-    user.gender = gender;
+    user.genderId = genderId;
     user.email = email;
     user.phones = phones;
     user.discount = discount;

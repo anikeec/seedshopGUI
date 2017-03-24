@@ -4,11 +4,13 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { SeedUserListReply } from './SeedUserListReply';
+import {SeedUserGenderListReply} from "./SeedUserGenderListReply";
 
 @Injectable()
 export class SeedUserService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
   private usersUrl = 'http://localhost:8080/users';  // URL to web api
+  private userGendersUrl = 'http://localhost:8080/ugender';
   constructor(
         private http: Http
   ) { }
@@ -40,6 +42,18 @@ export class SeedUserService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  getUserGenders(): Promise<SeedUserGenderListReply> {
+    const url = `${this.userGendersUrl}/all`;
+    return this.http.get(url,{headers: this.headers})
+      .toPromise()
+      .then(response =>{
+        console.log("userGenders JSON: "+JSON.stringify(response.json()));
+        let ret = Promise.resolve(response.json() as SeedUserGenderListReply);
+        return ret;
+      })
+      .catch(this.handleError);
   }
 }
 
