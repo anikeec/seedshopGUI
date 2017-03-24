@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {SeedInvoiceService} from "./invoice.service";
 import {SeedInvoice} from "./SeedInvoice";
+import {Router} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -12,10 +13,14 @@ import {SeedInvoice} from "./SeedInvoice";
 export class InvoiceComponent implements OnInit {
   invoices: SeedInvoice[] = [];
 
-  constructor(private seedinvoiceService: SeedInvoiceService) { }
+  constructor(private seedinvoiceService: SeedInvoiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.seedinvoiceService.getInvoices()
       .then(invoices => this.invoices = invoices);
+  }
+
+  gotoEdit(invoiceId:number): void {
+    this.router.navigate(['/invoiceDetail', invoiceId]);
   }
 }

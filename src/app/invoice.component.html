@@ -27,6 +27,7 @@
       <th>CurrLid</th>
       <th>BackorderId</th>
       <th>StatusId</th>
+      <th>Edit</th>
     </tr>
     <tr *ngFor="let inv of invoices">
       <th>{{inv.orderId}}</th>
@@ -53,6 +54,7 @@
       <th>{{inv.currL}}</th>
       <th>{{inv.backorderId}}</th>
       <th>{{inv.status}}</th>
+      <th><button (click)="gotoEdit(inv.orderId)">Edit</button></th>
     </tr>
     <tr>
     </tr>
