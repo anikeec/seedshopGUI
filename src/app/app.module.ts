@@ -20,6 +20,7 @@ import {CheckoutResultComponent} from "./checkoutResult.component";
 import {UserDetailComponent} from "./userDetail.component";
 import {InvoiceDetailComponent} from "./invoiceDetail.component";
 import {SeedLocationService} from "./location.service";
+import {SeedDeliveryServiceService} from "./deliveryservice.service";
 
 @NgModule({
     declarations: [
@@ -44,7 +45,7 @@ import {SeedLocationService} from "./location.service";
             storageType: 'localStorage'
         })
     ],
-    providers: [SeedUserService, SeedProductService, SeedBasketService, SeedInvoiceService, SeedLocationService],
+    providers: [SeedUserService, SeedProductService, SeedBasketService, SeedInvoiceService, SeedLocationService, SeedDeliveryServiceService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -93,7 +93,8 @@
       <li>
         <label for="delivery">Delivery:</label>
         <select #delivery name="delivery">
-          <option value="Nova Poshta">Nova Poshta</option>
+          <option *ngFor="let dservice of deliveryServices.deliveryServices" value="{{dservice.deliveryId}}"
+                  [selected] = "invoice.delivery == dservice.deliveryId? true : ''">{{dservice.name}}</option>
         </select>
       </li>
 
@@ -113,26 +114,30 @@
       <li>
         <label for="status">Status:</label>
         <select name="status">
-          <option *ngFor="let dstatus of deliveryStatuses.deliveryStatuses" value="{{dstatus.statusId}}" [selected] = "invoice.status == dstatus.statusId? true : ''">{{dstatus.status}}</option>
+          <option *ngFor="let dstatus of deliveryStatuses.deliveryStatuses" value="{{dstatus.statusId}}"
+                  [selected] = "invoice.status == dstatus.statusId? true : ''">{{dstatus.status}}</option>
         </select>
       </li>
 
       <li>
         <label for="sourceL">sourceL:</label>
         <select #sourceL name="sourceL">
-          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.sourceL == plocation.locationId? true : ''">{{plocation.name}}</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
+                  [selected] = "invoice.sourceL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="destL">destL:</label>
         <select #destL name="destL">
-          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.destL == plocation.locationId? true : ''">{{plocation.name}}</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
+                  [selected] = "invoice.destL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="currL">currL:</label>
         <select #currL name="currL">
-          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}" [selected] = "invoice.currL == plocation.locationId? true : ''">{{plocation.name}}</option>
+          <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
+                  [selected] = "invoice.currL == plocation.locationId? true : ''">{{plocation.name}}</option>
         </select>
       </li>
       <li>
