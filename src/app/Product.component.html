@@ -1,0 +1,58 @@
+<h3>Seedshop Products</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>barcode</th>
+      <th>aProductId</th>
+      <th>manufactId</th>
+      <th>packingId</th>
+      <th>Used</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let product of productList.products">
+      <th>{{product.barcode}}</th>
+      <th>{{product.aProductId}}</th>
+      <th>{{product.manufactId}}</th>
+      <th>{{product.packingId}}</th>
+      <th>{{product.used}}</th>
+      <th><button (click)="delete(product.barcode)">Delete</button></th>
+      <th><button (click)="restore(product.barcode)">Restore</button></th>
+    </tr>
+    <tr>
+      <th><input [(ngModel)]="productNew.barcode" placeholder="barcode" /></th>
+      <th><input [(ngModel)]="productNew.aProductId" placeholder="weight" /></th>
+      <th>
+        <select required [(ngModel)]="productNew.manufactId">
+          <option *ngFor="let manufacture of manufactureList.manufactures" [ngValue]="manufacture.manufactureId">{{manufacture.name}}</option>
+        </select>
+      </th>
+      <th>
+        <select required [(ngModel)]="productNew.packingId">
+          <option *ngFor="let packing of packingList.packings" [ngValue]="packing.packingId">{{packing.packingId}}</option>
+        </select>
+      </th>
+      <th>
+        <select [(ngModel)]="productNew.used">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </th>
+      <th><button (click)="add()">Add / Save</button></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><button (click)="reload()">Reload products</button></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </table>
+  </div>
+<br><a *ngIf="results.error_message">Error: {{results.error_message}}. </a>
+<a *ngIf="results.error_message">(API version: {{results.apiVer}})</a>
+
