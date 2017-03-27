@@ -9,6 +9,7 @@ import {InvoiceComponent} from "./invoice.component";
 import {CheckoutResultComponent} from "./checkoutResult.component";
 import {UserDetailComponent} from "./userDetail.component";
 import {InvoiceDetailComponent} from "./invoiceDetail.component";
+import {ProductLocationComponent} from "./productLocation.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'invoice',  component: InvoiceComponent },
   { path: 'checkoutResult',  component: CheckoutResultComponent },
   { path: 'userDetail/:id',  component: UserDetailComponent },
-  { path: 'invoiceDetail/:id',  component: InvoiceDetailComponent }
+  { path: 'invoiceDetail/:id',  component: InvoiceDetailComponent },
+  { path: 'location', component: ProductLocationComponent}
 ];
 
 @NgModule({

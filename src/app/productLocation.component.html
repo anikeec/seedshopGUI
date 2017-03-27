@@ -1,0 +1,42 @@
+<h3>Seedshop Product Locations</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>LocationId</th>
+      <th>Name</th>
+      <th>Used</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let pLocation of pLocationsList.pLocations">
+      <th>{{pLocation.locationId}}</th>
+      <th>{{pLocation.name}}</th>
+      <th>{{pLocation.used}}</th>
+      <th><button (click)="delete(pLocation.locationId)">Delete</button></th>
+      <th><button (click)="restore(pLocation.locationId)">Restore</button></th>
+    </tr>
+    <tr>
+      <th><input [(ngModel)]="pLocationNew.locationId" placeholder="locationId" /></th>
+      <th><input [(ngModel)]="pLocationNew.name" placeholder="name" /></th>
+      <th>
+        <select [(ngModel)]="pLocationNew.used">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </th>
+      <th><button (click)="add()">Add / Save</button></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><button (click)="reload()">Reload locations</button></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </table>
+  </div>
+<br><a *ngIf="results.error_message">Error: {{results.error_message}}. </a>
+<a *ngIf="results.error_message">(API version: {{results.apiVer}})</a>
+

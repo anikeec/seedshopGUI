@@ -21,6 +21,7 @@ import {UserDetailComponent} from "./userDetail.component";
 import {InvoiceDetailComponent} from "./invoiceDetail.component";
 import {ProductLocationService} from "./productLocation.service";
 import {SeedDeliveryServiceService} from "./deliveryservice.service";
+import {ProductLocationComponent} from "./productLocation.component";
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import {SeedDeliveryServiceService} from "./deliveryservice.service";
         InvoiceComponent,
         CheckoutResultComponent,
         UserDetailComponent,
-        InvoiceDetailComponent
+        InvoiceDetailComponent,
+        ProductLocationComponent
     ],
     imports: [
         BrowserModule,
