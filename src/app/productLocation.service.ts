@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 
 @Injectable()
-export class SeedLocationService {
+export class ProductLocationService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
   private locationUrl = 'http://localhost:8080/plocation';
 

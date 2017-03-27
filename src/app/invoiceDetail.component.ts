@@ -4,7 +4,7 @@ import {SeedInvoice} from "./SeedInvoice";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 import {SeedInvoiceService} from "./invoice.service";
 import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
-import {SeedLocationService} from "./location.service";
+import {ProductLocationService} from "./productLocation.service";
 import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 import {SeedDeliveryServiceService} from "./deliveryservice.service";
 import {SeedDeliveryServiceListReply} from "./SeedDeliveryServiceListReply";
@@ -26,7 +26,7 @@ export class InvoiceDetailComponent implements OnInit {
   invoiceId: number = 0;
 
   constructor( private invoiceService: SeedInvoiceService,
-               private locationService: SeedLocationService,
+               private locationService: ProductLocationService,
                private deliveryServService: SeedDeliveryServiceService,
                private route: ActivatedRoute,
                private router: Router) {
