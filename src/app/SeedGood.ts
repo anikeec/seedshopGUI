@@ -1,4 +1,4 @@
-export class SeedProduct{
+export class SeedGood{
     barcode: string;
     name: string;
     weight: string;

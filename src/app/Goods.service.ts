@@ -4,13 +4,13 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 import 'rxjs/add/operator/toPromise';
 
-import { SeedProduct } from './SeedProduct';
+import { SeedGood } from './SeedGood';
 import { SeedAddBasketQuery } from './SeedAddBasketQuery';
 import { SeedAnOrderItem } from './SeedAnOrderItem';
-import {SeedProductListReply} from "./SeedProductListReply";
+import {SeedGoodListReply} from "./SeedGoodListReply";
 
 @Injectable()
-export class SeedProductService {
+export class GoodsService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
   private productsUrl = 'http://localhost:8080/products';  // URL to web api
   private basketUrl = 'http://localhost:8080/basket';
@@ -20,19 +20,19 @@ export class SeedProductService {
         private localStService: LocalStorageService
   ) { }
 
-  getProducts(): Promise<SeedProductListReply> {
+  getProducts(): Promise<SeedGoodListReply> {
     const url = `${this.productsUrl}/all`;
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{
                  console.log("product JSON: "+JSON.stringify(response.json()));
-                 let ret = Promise.resolve(response.json() as SeedProductListReply);
+                 let ret = Promise.resolve(response.json() as SeedGoodListReply);
                  return ret;
                })
                .catch(this.handleError);
   }
 
-  create(product:  SeedProduct): Promise<SeedAddBasketQuery> {
+  create(product:  SeedGood): Promise<SeedAddBasketQuery> {
     const url = `${this.basketUrl}/add`;
     let item : SeedAnOrderItem = new SeedAnOrderItem("1",product.barcode,1,"0");
     let items : SeedAnOrderItem[] = [];

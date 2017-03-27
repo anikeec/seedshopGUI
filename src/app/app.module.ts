@@ -7,11 +7,11 @@ import {LocalStorageModule} from 'angular-2-local-storage';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ProductsComponent} from './products.component';
+import {GoodsComponent} from './Goods.component';
 import {UsersComponent} from './users.component';
 import {BasketComponent} from './basket.component';
 import {SeedUserService} from './users.service';
-import {SeedProductService} from './products.service';
+import {GoodsService} from './Goods.service';
 import {SeedBasketService} from "./basket.service";
 import {CheckoutComponent} from "./checkout.component";
 import {InvoiceComponent} from "./invoice.component";
@@ -33,7 +33,7 @@ import {PackingService} from "./Packing.service";
     declarations: [
         AppComponent,
         UsersComponent,
-        ProductsComponent,
+        GoodsComponent,
         BasketComponent,
         CheckoutComponent,
         InvoiceComponent,
@@ -57,7 +57,7 @@ import {PackingService} from "./Packing.service";
         })
     ],
     providers: [SeedUserService,
-                SeedProductService,
+                GoodsService,
                 SeedBasketService,
                 SeedInvoiceService,
                 ProductLocationService,
