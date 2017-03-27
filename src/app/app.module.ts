@@ -24,6 +24,8 @@ import {SeedDeliveryServiceService} from "./deliveryservice.service";
 import {ProductLocationComponent} from "./productLocation.component";
 import {ManufactureComponent} from "./Manufacture.component";
 import {ManufactureService} from "./Manufacture.service";
+import {PackComponent} from "./Pack.component";
+import {PackService} from "./Pack.service";
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import {ManufactureService} from "./Manufacture.service";
         UserDetailComponent,
         InvoiceDetailComponent,
         ProductLocationComponent,
-        ManufactureComponent
+        ManufactureComponent,
+        PackComponent
     ],
     imports: [
         BrowserModule,
@@ -56,7 +59,8 @@ import {ManufactureService} from "./Manufacture.service";
                 SeedInvoiceService,
                 ProductLocationService,
                 SeedDeliveryServiceService,
-                ManufactureService],
+                ManufactureService,
+                PackService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

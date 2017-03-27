@@ -11,6 +11,7 @@ import {UserDetailComponent} from "./userDetail.component";
 import {InvoiceDetailComponent} from "./invoiceDetail.component";
 import {ProductLocationComponent} from "./productLocation.component";
 import {ManufactureComponent} from "./Manufacture.component";
+import {PackComponent} from "./Pack.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'userDetail/:id',  component: UserDetailComponent },
   { path: 'invoiceDetail/:id',  component: InvoiceDetailComponent },
   { path: 'location', component: ProductLocationComponent},
-  { path: 'manufacture', component: ManufactureComponent}
+  { path: 'manufacture', component: ManufactureComponent},
+  { path: 'pack', component: PackComponent}
 ];
 
 @NgModule({
