@@ -6,7 +6,7 @@ import {SeedGoodListReply} from "./SeedGoodListReply";
 
 @Component({
   moduleId: module.id,
-  selector: 'my-products',
+  selector: 'my-goods',
   templateUrl: 'Goods.component.html',
   styleUrls: [ 'Goods.component.css' ]
 })

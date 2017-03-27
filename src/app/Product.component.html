@@ -7,6 +7,7 @@
       <th>aProductId</th>
       <th>manufactId</th>
       <th>packingId</th>
+      <th>price</th>
       <th>Used</th>
       <th></th>
       <th></th>
@@ -16,6 +17,7 @@
       <th>{{product.aProductId}}</th>
       <th>{{product.manufactId}}</th>
       <th>{{product.packingId}}</th>
+      <th>{{product.price}}</th>
       <th>{{product.used}}</th>
       <th><button (click)="delete(product.barcode)">Delete</button></th>
       <th><button (click)="restore(product.barcode)">Restore</button></th>
@@ -33,6 +35,7 @@
           <option *ngFor="let packing of packingList.packings" [ngValue]="packing.packingId">{{packing.packingId}}</option>
         </select>
       </th>
+      <th><input [(ngModel)]="productNew.price" placeholder="price" /></th>
       <th>
         <select [(ngModel)]="productNew.used">
           <option value="true">Yes</option>
@@ -45,6 +48,7 @@
     <tr>
       <th></th>
       <th><button (click)="reload()">Reload products</button></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

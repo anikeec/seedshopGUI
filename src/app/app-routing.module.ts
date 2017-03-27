@@ -16,7 +16,7 @@ import {PackingComponent} from "./Packing.component";
 import {ProductComponent} from "./Product.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', redirectTo: '/goods', pathMatch: 'full' },
   { path: 'users',     component: UsersComponent },
   { path: 'goods',  component: GoodsComponent },
   { path: 'basket',  component: BasketComponent },

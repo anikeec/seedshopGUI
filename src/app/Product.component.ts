@@ -49,19 +49,31 @@ export class ProductComponent implements OnInit {
   }
 
   add(): void {
-    this.productService.create(this.productNew)
-      .then(rep => {
-        this.results = rep;
-        this.productNew.barcode = null;
-        this.productNew.price = null;
-        return this.reload();
-      })
+    this.create(this.productNew);
   }
 
+  create(product: SeedProduct) {
+    this.productService.create(product)
+      .then(rep => {
+        this.results = rep;
+        if(rep.retcode == 0) {
+          product.barcode = null;
+          product.price = null;
+        }
+        return this.reload();
+      })
+}
+
   restore(barcode: string): void {
-    //this.productNew = this.productList.products[id-1];
-    //this.productNew.used = "true";
-    return this.add();
+    let productTemp: SeedProduct = new SeedProduct();
+    for(let i:number=0;i<this.productList.products.length;i++) {
+      if(this.productList.products[i].barcode === barcode) {
+        productTemp = this.productList.products[i];
+        productTemp.used = "true";
+        break;
+      }
+    }
+    return this.create(productTemp);
   }
 
   delete(barcode: string): void {
