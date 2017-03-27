@@ -22,6 +22,8 @@ import {InvoiceDetailComponent} from "./invoiceDetail.component";
 import {ProductLocationService} from "./productLocation.service";
 import {SeedDeliveryServiceService} from "./deliveryservice.service";
 import {ProductLocationComponent} from "./productLocation.component";
+import {ManufactureComponent} from "./Manufacture.component";
+import {ManufactureService} from "./Manufacture.service";
 
 @NgModule({
     declarations: [
@@ -34,7 +36,8 @@ import {ProductLocationComponent} from "./productLocation.component";
         CheckoutResultComponent,
         UserDetailComponent,
         InvoiceDetailComponent,
-        ProductLocationComponent
+        ProductLocationComponent,
+        ManufactureComponent
     ],
     imports: [
         BrowserModule,
@@ -47,7 +50,13 @@ import {ProductLocationComponent} from "./productLocation.component";
             storageType: 'localStorage'
         })
     ],
-    providers: [SeedUserService, SeedProductService, SeedBasketService, SeedInvoiceService, ProductLocationService, SeedDeliveryServiceService],
+    providers: [SeedUserService,
+                SeedProductService,
+                SeedBasketService,
+                SeedInvoiceService,
+                ProductLocationService,
+                SeedDeliveryServiceService,
+                ManufactureService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

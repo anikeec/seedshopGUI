@@ -1,0 +1,46 @@
+<h3>Seedshop Product Manufactures</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>ManufactureId</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Used</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let manufacture of manufactureList.manufactures">
+      <th>{{manufacture.manufactureId}}</th>
+      <th>{{manufacture.name}}</th>
+      <th>{{manufacture.adress}}</th>
+      <th>{{manufacture.used}}</th>
+      <th><button (click)="delete(manufacture.manufactureId)">Delete</button></th>
+      <th><button (click)="restore(manufacture.manufactureId)">Restore</button></th>
+    </tr>
+    <tr>
+      <th><input [(ngModel)]="manufactureNew.manufactureId" placeholder="manufactureId" /></th>
+      <th><input [(ngModel)]="manufactureNew.name" placeholder="name" /></th>
+      <th><input [(ngModel)]="manufactureNew.adress" placeholder="adress" /></th>
+      <th>
+        <select [(ngModel)]="manufactureNew.used">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </th>
+      <th><button (click)="add()">Add / Save</button></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><button (click)="reload()">Reload manufactures</button></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </table>
+  </div>
+<br><a *ngIf="results.error_message">Error: {{results.error_message}}. </a>
+<a *ngIf="results.error_message">(API version: {{results.apiVer}})</a>
+
