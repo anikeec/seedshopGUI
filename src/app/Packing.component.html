@@ -1,0 +1,50 @@
+<h3>Seedshop Product Packings</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>PackingId</th>
+      <th>PackId</th>
+      <th>Weight</th>
+      <th>Amount</th>
+      <th>Used</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let packing of packingList.packings">
+      <th>{{packing.packingId}}</th>
+      <th>{{packing.packId}}</th>
+      <th>{{packing.weight}}</th>
+      <th>{{packing.amount}}</th>
+      <th>{{packing.used}}</th>
+      <th><button (click)="delete(packing.packingId)">Delete</button></th>
+      <th><button (click)="restore(packing.packingId)">Restore</button></th>
+    </tr>
+    <tr>
+      <th><input [(ngModel)]="packingNew.packingId" placeholder="packingId" /></th>
+      <th><input [(ngModel)]="packingNew.packId" placeholder="packId" /></th>
+      <th><input [(ngModel)]="packingNew.weight" placeholder="weight" /></th>
+      <th><input [(ngModel)]="packingNew.amount" placeholder="amount" /></th>
+      <th>
+        <select [(ngModel)]="packingNew.used">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </th>
+      <th><button (click)="add()">Add / Save</button></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><button (click)="reload()">Reload packings</button></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </table>
+  </div>
+<br><a *ngIf="results.error_message">Error: {{results.error_message}}. </a>
+<a *ngIf="results.error_message">(API version: {{results.apiVer}})</a>
+

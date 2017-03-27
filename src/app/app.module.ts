@@ -26,6 +26,8 @@ import {ManufactureComponent} from "./Manufacture.component";
 import {ManufactureService} from "./Manufacture.service";
 import {PackComponent} from "./Pack.component";
 import {PackService} from "./Pack.service";
+import {PackingComponent} from "./Packing.component";
+import {PackingService} from "./Packing.service";
 
 @NgModule({
     declarations: [
@@ -40,7 +42,8 @@ import {PackService} from "./Pack.service";
         InvoiceDetailComponent,
         ProductLocationComponent,
         ManufactureComponent,
-        PackComponent
+        PackComponent,
+        PackingComponent
     ],
     imports: [
         BrowserModule,
@@ -60,7 +63,8 @@ import {PackService} from "./Pack.service";
                 ProductLocationService,
                 SeedDeliveryServiceService,
                 ManufactureService,
-                PackService],
+                PackService,
+                PackingService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
