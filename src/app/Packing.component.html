@@ -22,7 +22,11 @@
     </tr>
     <tr>
       <th><input [(ngModel)]="packingNew.packingId" placeholder="packingId" /></th>
-      <th><input [(ngModel)]="packingNew.packId" placeholder="packId" /></th>
+      <th>
+        <select required [(ngModel)]="packingNew.packId">
+          <option *ngFor="let pack of packList.packs" [ngValue]="pack.packId">{{pack.name}}</option>
+        </select>
+      </th>
       <th><input [(ngModel)]="packingNew.weight" placeholder="weight" /></th>
       <th><input [(ngModel)]="packingNew.amount" placeholder="amount" /></th>
       <th>

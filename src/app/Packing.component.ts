@@ -5,6 +5,8 @@ import {SeedPacking} from "./SeedPacking";
 import {PackingService} from "./Packing.service";
 import {SeedPackingListReply} from "./SeedPackingListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
+import {PackService} from "./Pack.service";
+import {SeedPackListReply} from "./SeedPackListReply";
 
 @Component({
   moduleId: module.id,
@@ -16,11 +18,18 @@ export class PackingComponent implements OnInit {
   packingList: SeedPackingListReply = new SeedPackingListReply();
   packingNew: SeedPacking = new SeedPacking();
   results: SeedGenericReply = new SeedGenericReply();
+  packList: SeedPackListReply = new SeedPackListReply();
 
-  constructor(private packingService: PackingService, private router: Router) { }
+  constructor(private packingService: PackingService, private packService: PackService, private router: Router) { }
 
   ngOnInit(): void {
-    this.packingService.getPackings()
+
+    this.packService.getPacks()
+      .then(retPacks => {
+        this.packList = retPacks;
+        return this.packingService.getPackings()
+      })
+
       .then(retPackings => this.packingList = retPackings);
   }
 
@@ -54,4 +63,5 @@ export class PackingComponent implements OnInit {
     this.packingService.getPackings()
       .then(retPlocations => this.packingList = retPlocations);
   }
+
 }
