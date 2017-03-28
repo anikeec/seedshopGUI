@@ -115,7 +115,7 @@
         <label for="status">Status:</label>
         <select name="status">
           <option *ngFor="let dstatus of deliveryStatuses.deliveryStatuses" value="{{dstatus.statusId}}"
-                  [selected] = "invoice.status == dstatus.statusId? true : ''">{{dstatus.status}}</option>
+                  [selected] = "invoice.name == dstatus.statusId? true : ''">{{dstatus.name}}</option>
         </select>
       </li>
 
@@ -175,7 +175,7 @@
                                             delivery.value,
                                             deliveryOffice.value,
                                             prepayment.value,
-                                            status.value,
+                                            name.value,
                                             sourceL.value,
                                             destL.value,
                                             currL.value,

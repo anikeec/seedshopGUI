@@ -1,6 +1,6 @@
 export class SeedDeliveryStatus{
     statusId: number;
-    status: string;
+    name: string;
     used: string;
 }
 
