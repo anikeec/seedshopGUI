@@ -34,7 +34,11 @@ export class PackingComponent implements OnInit {
   }
 
   add(): void {
-    this.packingService.create(this.packingNew)
+    this.create(this.packingNew);
+  }
+
+  create(packing: SeedPacking) {
+    this.packingService.create(packing)
       .then(rep => {
         this.results = rep;
         this.packingNew.packingId = null;
@@ -46,9 +50,20 @@ export class PackingComponent implements OnInit {
   }
 
   restore(id: number): void {
-    this.packingNew = this.packingList.packings[id-1];
-    this.packingNew.used = "true";
-    return this.add();
+    let packingTemp: SeedPacking = null;
+    for(let i:number=0;i<this.packingList.packings.length;i++) {
+      if(this.packingList.packings[i].packingId == id) {
+        packingTemp  = new SeedPacking();
+        packingTemp.packingId = this.packingList.packings[i].packingId;
+        packingTemp.packId = this.packingList.packings[i].packId;
+        packingTemp.amount = this.packingList.packings[i].amount;
+        packingTemp.weight = this.packingList.packings[i].weight;
+        packingTemp.used = "true";
+        break;
+      }
+    }
+    if(packingTemp == null)  return;
+    return this.create(packingTemp);
   }
 
   delete(id: number): void {
