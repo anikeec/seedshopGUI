@@ -11,8 +11,8 @@ import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
 @Injectable()
 export class SeedInvoiceService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
-  private invoiceUrl = 'http://localhost:8080/invoices';
-  private deliveryStatusUrl = 'http://localhost:8080/dstatus';
+  private invoiceUrl = 'https://localhost:8443/invoices';
+  private deliveryStatusUrl = 'https://localhost:8443/dstatus';
   private token:string;
   constructor(
         private http: Http

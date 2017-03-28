@@ -9,8 +9,8 @@ import {SeedUserGenderListReply} from "./SeedUserGenderListReply";
 @Injectable()
 export class SeedUserService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
-  private usersUrl = 'http://localhost:8080/users';  // URL to web api
-  private userGendersUrl = 'http://localhost:8080/ugender';
+  private usersUrl = 'https://localhost:8443/users';  // URL to web api
+  private userGendersUrl = 'https://localhost:8443/ugender';
   constructor(
         private http: Http
   ) { }

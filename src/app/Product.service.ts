@@ -10,7 +10,7 @@ import {SeedProduct} from "./SeedProduct";
 @Injectable()
 export class ProductService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
-  private locationUrl = 'http://localhost:8080/products';
+  private locationUrl = 'https://localhost:8443/products';
 
   constructor(private http: Http) {
   }

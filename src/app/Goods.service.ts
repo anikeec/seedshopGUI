@@ -12,8 +12,8 @@ import {SeedGoodListReply} from "./SeedGoodListReply";
 @Injectable()
 export class GoodsService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
-  private productsUrl = 'http://localhost:8080/products';  // URL to web api
-  private basketUrl = 'http://localhost:8080/basket';
+  private productsUrl = 'https://localhost:8443/products';  // URL to web api
+  private basketUrl = 'https://localhost:8443/basket';
   private token:string;
   constructor(
         private http: Http,

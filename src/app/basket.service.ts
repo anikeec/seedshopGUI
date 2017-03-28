@@ -9,7 +9,7 @@ import { SeedBasketItem } from './SeedBasketItem';
 export class SeedBasketService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
   private sessionId : String = "1234567890";
-  private basketUrl = 'http://localhost:8080/basket';
+  private basketUrl = 'https://localhost:8443/basket';
   private token:string;
   constructor(
         private http: Http

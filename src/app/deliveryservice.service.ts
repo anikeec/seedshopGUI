@@ -8,7 +8,7 @@ import {SeedDeliveryServiceListReply} from "./SeedDeliveryServiceListReply";
 @Injectable()
 export class SeedDeliveryServiceService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
-  private deliveryUrl = 'http://localhost:8080/dservice';
+  private deliveryUrl = 'https://localhost:8443/dservice';
 
   constructor(private http: Http) {
   }

@@ -10,7 +10,7 @@ import {SeedPack} from "./SeedPack";
 @Injectable()
 export class PackService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
-  private locationUrl = 'http://localhost:8080/pack';
+  private locationUrl = 'https://localhost:8443/pack';
 
   constructor(private http: Http) {
   }
