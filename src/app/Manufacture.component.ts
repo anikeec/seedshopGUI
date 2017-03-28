@@ -25,20 +25,36 @@ export class ManufactureComponent implements OnInit {
   }
 
   add(): void {
-    this.manufactureService.create(this.manufactureNew)
+    this.create(this.manufactureNew);
+  }
+
+  create(manufacture: SeedManufacture) {
+    this.manufactureService.create(manufacture)
       .then(rep => {
         this.results = rep;
-        this.manufactureNew.manufactureId = null;
-        this.manufactureNew.name = null;
-        this.manufactureNew.adress = null;
+        if(rep.retcode == 0) {
+          this.manufactureNew.manufactureId = null;
+          this.manufactureNew.name = null;
+          this.manufactureNew.adress = null;
+        }
         return this.reload();
       })
   }
 
   restore(id: number): void {
-    this.manufactureNew = this.manufactureList.manufactures[id-1];
-    this.manufactureNew.used = "true";
-    return this.add();
+    let manufactureTemp: SeedManufacture = null;
+    for(let i:number=0;i<this.manufactureList.manufactures.length;i++) {
+      if(this.manufactureList.manufactures[i].manufactureId == id) {
+        manufactureTemp  = new SeedManufacture();
+        manufactureTemp.manufactureId = this.manufactureList.manufactures[i].manufactureId;
+        manufactureTemp.name = this.manufactureList.manufactures[i].name;
+        manufactureTemp.adress = this.manufactureList.manufactures[i].adress;
+        manufactureTemp.used = "true";
+        break;
+      }
+    }
+    if(manufactureTemp == null)  return;
+    return this.create(manufactureTemp);
   }
 
   delete(id: number): void {
