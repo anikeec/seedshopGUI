@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { SeedUserListReply } from './SeedUserListReply';
 import {SeedUserGenderListReply} from "./SeedUserGenderListReply";
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Injectable()
 export class SeedUserService {
@@ -12,11 +13,20 @@ export class SeedUserService {
   private usersUrl = 'https://localhost:8443/users';  // URL to web api
   private userGendersUrl = 'https://localhost:8443/ugender';
   constructor(
-        private http: Http
-  ) { }
+        private http: Http,
+        private localStService: LocalStorageService) {}
 
   getUsers(): Promise<SeedUserListReply> {
     const url = `${this.usersUrl}/all`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.get(url,{headers: this.headers})
       .toPromise()
       .then(response =>{
@@ -29,6 +39,15 @@ export class SeedUserService {
 
   getUser(id: number): Promise<SeedUserListReply> {
     const url = `${this.usersUrl}/byid/${id}`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.get(url,{headers: this.headers})
       .toPromise()
       .then(response =>{

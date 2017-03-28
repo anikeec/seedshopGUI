@@ -38,7 +38,16 @@ export class ProductLocationService {
 
   delete(id: number): Promise<SeedGenericReply> {
     const url = `${this.locationUrl}/del/${id}`;
-    return this.http.get(url)
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
+    return this.http.get(url, { headers: this.headers })
       .toPromise()
       .then(response => {
         console.log("Delete product location JSON: " + JSON.stringify(response.json()));
@@ -56,6 +65,15 @@ export class ProductLocationService {
     mess.name = productLocation.name;
     mess.used = productLocation.used;
     let message :String = JSON.stringify(mess);
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.post(url,mess,{headers: this.headers})
       .toPromise()
       .then(response =>{

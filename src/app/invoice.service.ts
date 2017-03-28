@@ -7,6 +7,7 @@ import {SeedInvoice} from "./SeedInvoice";
 import {SeedAddInvoiceQuery} from "./SeedAddInvoiceQuery";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Injectable()
 export class SeedInvoiceService {
@@ -15,11 +16,21 @@ export class SeedInvoiceService {
   private deliveryStatusUrl = 'https://localhost:8443/dstatus';
   private token:string;
   constructor(
-        private http: Http
+        private http: Http,
+        private localStService: LocalStorageService
   ) { }
 
   getInvoices(): Promise<SeedInvoice[]> {
     const url = `${this.invoiceUrl}/all`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{
@@ -31,6 +42,15 @@ export class SeedInvoiceService {
 
   getInvoice(id: number): Promise<SeedInvoiceListReply> {
     const url = `${this.invoiceUrl}/byid/${id}`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.get(url,{headers: this.headers})
       .toPromise()
       .then(response =>{
@@ -46,6 +66,15 @@ export class SeedInvoiceService {
 
     let mess : SeedAddInvoiceQuery = new SeedAddInvoiceQuery("1234567890",invoice);
     let message :String = JSON.stringify(mess);
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.post(url,mess,{headers: this.headers})
       .toPromise()
       .then(response =>{

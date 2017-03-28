@@ -6,17 +6,27 @@ import 'rxjs/add/operator/toPromise';
 import {SeedPackingListReply} from "./SeedPackingListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
 import {SeedPacking} from "./SeedPacking";
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Injectable()
 export class PackingService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
   private locationUrl = 'https://localhost:8443/packing';
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http,
+              private localStService: LocalStorageService) {}
 
   getPackings(): Promise<SeedPackingListReply> {
     const url = `${this.locationUrl}/all`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => {
@@ -29,7 +39,16 @@ export class PackingService {
 
   delete(id: number): Promise<SeedGenericReply> {
     const url = `${this.locationUrl}/del/${id}`;
-    return this.http.get(url)
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
+    return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.log("Delete Packing JSON: " + JSON.stringify(response.json()));
@@ -49,6 +68,15 @@ export class PackingService {
     mess.amount = packing.amount;
     mess.used = packing.used;
     let message :String = JSON.stringify(mess);
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
     return this.http.post(url,mess,{headers: this.headers})
       .toPromise()
       .then(response =>{

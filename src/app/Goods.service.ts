@@ -22,6 +22,13 @@ export class GoodsService {
 
   getProducts(): Promise<SeedGoodListReply> {
     const url = `${this.productsUrl}/all`;
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{
@@ -39,6 +46,13 @@ export class GoodsService {
     let basket = new SeedAddBasketQuery("1234567890",items);
     basket.products.push(item);
     let message :String = JSON.stringify(basket);
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
     return this.http.post(url,basket,{headers: this.headers})
       .toPromise()
       .then(response =>{
