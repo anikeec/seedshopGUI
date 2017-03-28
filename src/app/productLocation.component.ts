@@ -25,19 +25,34 @@ export class ProductLocationComponent implements OnInit {
   }
 
   add(): void {
-    this.productLocationService.create(this.pLocationNew)
+    this.create(this.pLocationNew);
+  }
+
+  create(plocation: SeedProductLocation) {
+    this.productLocationService.create(plocation)
       .then(rep => {
         this.results = rep;
-        this.pLocationNew.locationId = null;
-        this.pLocationNew.name = null;
+        if(rep.retcode == 0) {
+          this.pLocationNew.locationId = null;
+          this.pLocationNew.name = null;
+        }
         return this.reload();
       })
   }
 
   restore(id: number): void {
-    this.pLocationNew = this.pLocationsList.pLocations[id-1];
-    this.pLocationNew.used = "true";
-    return this.add();
+    let ProductLocationTemp: SeedProductLocation = null;
+    for(let i:number=0;i<this.pLocationsList.pLocations.length;i++) {
+      if(this.pLocationsList.pLocations[i].locationId == id) {
+        ProductLocationTemp  = new SeedProductLocation();
+        ProductLocationTemp.locationId = this.pLocationsList.pLocations[i].locationId;
+        ProductLocationTemp.name = this.pLocationsList.pLocations[i].name;
+        ProductLocationTemp.used = "true";
+        break;
+      }
+    }
+    if(ProductLocationTemp == null)  return;
+    return this.create(ProductLocationTemp);
   }
 
   delete(id: number): void {
