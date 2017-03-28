@@ -1,0 +1,46 @@
+<h3>Seedshop Product DeliveryStatus</h3>
+<div class="grid grid-pad">
+
+  <table align="center" border="1" cellpadding="5">
+    <tr>
+      <th>ManufactureId</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Used</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let deliveryStatus of deliveryStatusList.deliveryStatuses">
+      <th>{{deliveryStatus.statusId}}</th>
+      <th>{{deliveryStatus.name}}</th>
+      <th></th>
+      <th>{{deliveryStatus.used}}</th>
+      <th><button (click)="delete(deliveryStatus.statusId)">Delete</button></th>
+      <th><button (click)="restore(deliveryStatus.statusId)">Restore</button></th>
+    </tr>
+    <tr>
+      <th><input [(ngModel)]="deliveryStatusNew.statusId" placeholder="statusId" /></th>
+      <th><input [(ngModel)]="deliveryStatusNew.name" placeholder="name" /></th>
+      <th></th>
+      <th>
+        <select [(ngModel)]="deliveryStatusNew.used">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </th>
+      <th><button (click)="add()">Add / Save</button></th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th><button (click)="reload()">Reload delivery statuses</button></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </table>
+  </div>
+<br><a *ngIf="results.error_message">Error: {{results.error_message}}. </a>
+<a *ngIf="results.error_message">(API version: {{results.apiVer}})</a>
+

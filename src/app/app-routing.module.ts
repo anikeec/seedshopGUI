@@ -14,6 +14,7 @@ import {ManufactureComponent} from "./Manufacture.component";
 import {PackComponent} from "./Pack.component";
 import {PackingComponent} from "./Packing.component";
 import {ProductComponent} from "./Product.component";
+import {DeliveryStatusComponent} from "./DeliveryStatus.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/goods', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'manufacture', component: ManufactureComponent},
   { path: 'pack', component: PackComponent},
   { path: 'packing', component: PackingComponent},
-  { path: 'product', component: ProductComponent}
+  { path: 'product', component: ProductComponent},
+  { path: 'dstatus', component: DeliveryStatusComponent}
 ];
 
 @NgModule({
