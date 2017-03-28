@@ -1,23 +1,27 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 import {SeedManufactureListReply} from "./SeedManufactureListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
 import {SeedManufacture} from "./SeedManufacture";
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Injectable()
 export class ManufactureService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8'});
   private locationUrl = 'https://localhost:8443/manufacture';
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private localStService: LocalStorageService) {
   }
 
   getManufactures(): Promise<SeedManufactureListReply> {
     const url = `${this.locationUrl}/all`;
-    return this.http.get(url, {headers: this.headers})
+    let tok:string = this.localStService.get<string>('token');
+    this.headers.append('X-Authorization',tok);
+    let options = new RequestOptions({ headers: this.headers });
+    return this.http.get(url, options)
       .toPromise()
       .then(response => {
         console.log("Product location JSON: " + JSON.stringify(response.json()));
