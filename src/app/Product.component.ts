@@ -68,7 +68,11 @@ export class ProductComponent implements OnInit {
     let productTemp: SeedProduct = new SeedProduct();
     for(let i:number=0;i<this.productList.products.length;i++) {
       if(this.productList.products[i].barcode === barcode) {
-        productTemp = this.productList.products[i];
+        productTemp.barcode = this.productList.products[i].barcode;
+        productTemp.manufactId = this.productList.products[i].manufactId;
+        productTemp.aProductId = this.productList.products[i].aProductId;
+        productTemp.packingId = this.productList.products[i].packingId;
+        productTemp.price = this.productList.products[i].price;
         productTemp.used = "true";
         break;
       }
