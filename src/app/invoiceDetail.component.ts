@@ -8,6 +8,7 @@ import {ProductLocationService} from "./productLocation.service";
 import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 import {SeedDeliveryServiceService} from "./deliveryservice.service";
 import {SeedDeliveryServiceListReply} from "./SeedDeliveryServiceListReply";
+import {DeliveryStatusService} from "./DeliveryStatus.service";
 
 
 @Component({
@@ -28,6 +29,7 @@ export class InvoiceDetailComponent implements OnInit {
   constructor( private invoiceService: SeedInvoiceService,
                private locationService: ProductLocationService,
                private deliveryServService: SeedDeliveryServiceService,
+               private deliveryStatusService: DeliveryStatusService,
                private route: ActivatedRoute,
                private router: Router) {
 
@@ -39,7 +41,7 @@ export class InvoiceDetailComponent implements OnInit {
           this.invoiceId = params['id'];
           console.log("PARAMS ID: " + this.invoiceId + "<<");
 
-          this.invoiceService.getDeliveryStatuses()
+          this.deliveryStatusService.getDeliveryStatuses()
 
             .then(
               dstatuses => {

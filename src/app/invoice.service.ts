@@ -89,18 +89,6 @@ export class SeedInvoiceService {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
-
-  getDeliveryStatuses(): Promise<SeedDeliveryStatusListReply> {
-    const url = `${this.deliveryStatusUrl}/all`;
-    return this.http.get(url,{headers: this.headers})
-      .toPromise()
-      .then(response =>{
-        console.log("deliveryStatuses JSON: "+JSON.stringify(response.json()));
-        let dstatuses = Promise.resolve(response.json() as SeedDeliveryStatusListReply);
-        return dstatuses;
-      })
-      .catch(this.handleError);
-  }
 }
 
 
