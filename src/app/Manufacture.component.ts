@@ -22,7 +22,13 @@ export class ManufactureComponent implements OnInit {
 
   ngOnInit(): void {
     this.manufactureService.getManufactures()
-      .then(retManufactures => this.manufactureList = retManufactures);
+      .then(retManufactures => {
+        this.manufactureList = retManufactures;
+        this.results = retManufactures;
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });;
   }
 
   add(): void {
@@ -40,6 +46,9 @@ export class ManufactureComponent implements OnInit {
         }
         return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   restore(id: number): void {
@@ -65,15 +74,25 @@ export class ManufactureComponent implements OnInit {
         return this.reload();
       })
       .catch((err:Response) => {
-        if(err.status == 401) {
-          this.results.error_message = 'You have not access to this partition. Please enter Login and Password.'
-        }
+        this.errorHandler(err);
       });
   }
 
   reload():void {
     this.manufactureService.getManufactures()
-      .then(retPlocations => this.manufactureList = retPlocations);
+      .then(retPlocations => {
+        this.manufactureList = retPlocations;
+        this.results = retPlocations;
+      })
+      .catch((err:Response) => {
+          this.errorHandler(err);
+        });
+  }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
   }
 
 }
