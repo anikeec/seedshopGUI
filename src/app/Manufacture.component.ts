@@ -5,6 +5,7 @@ import {SeedManufacture} from "./SeedManufacture";
 import {ManufactureService} from "./Manufacture.service";
 import {SeedManufactureListReply} from "./SeedManufactureListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
+import {Response} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -63,10 +64,16 @@ export class ManufactureComponent implements OnInit {
         this.results = deleteRequestAnswer;
         return this.reload();
       })
+      .catch((err:Response) => {
+        if(err.status == 401) {
+          this.results.error_message = 'You have not access to this partition. Please enter Login and Password.'
+        }
+      });
   }
 
   reload():void {
     this.manufactureService.getManufactures()
       .then(retPlocations => this.manufactureList = retPlocations);
   }
+
 }
