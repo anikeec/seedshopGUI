@@ -4,6 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { SeedBasketItem } from './SeedBasketItem';
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Injectable()
 export class SeedBasketService {
@@ -12,11 +13,21 @@ export class SeedBasketService {
   private basketUrl = 'https://localhost:8443/basket';
   private token:string;
   constructor(
-        private http: Http
+        private http: Http,
+        private localStService: LocalStorageService
   ) { }
 
   getAnOrders(): Promise<SeedBasketItem[]> {
     const url = `${this.basketUrl}/all/` + this.sessionId;
+
+    let tok:string = this.localStService.get<string>('token');
+      let mes: string = this.headers.get('X-Authorization');
+      if (mes != null) {
+        this.headers.set('X-Authorization', tok);
+      } else {
+        this.headers.append('X-Authorization', tok);
+      }
+
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{

@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { SeedGood }        from './SeedGood';
 import { GoodsService } from './Goods.service';
 import {SeedGoodListReply} from "./SeedGoodListReply";
+import {Response} from "@angular/http";
+import {SeedGenericReply} from "./SeedGenericReply";
+import {LocalStorageService} from "angular-2-local-storage";
 
 @Component({
   moduleId: module.id,
@@ -12,17 +15,22 @@ import {SeedGoodListReply} from "./SeedGoodListReply";
 })
 
 export class GoodsComponent implements OnInit {
-  results: SeedGoodListReply = new SeedGoodListReply();
+  goodsList: SeedGoodListReply = new SeedGoodListReply();
+  results: SeedGenericReply = new SeedGenericReply();
 
-  constructor(private goodsService: GoodsService) { }
+  constructor(private goodsService: GoodsService,
+              private localStService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.goodsService.getProducts()
       .then(ret => {
+        this.goodsList = ret;
         this.results = ret;
-        this.checkProducts(this.results);
-      }).catch(error => {
-    });
+        this.checkProducts(this.goodsList);
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   checkProducts (prod: SeedGoodListReply){
@@ -36,6 +44,21 @@ export class GoodsComponent implements OnInit {
   }
 
   add(product : SeedGood): void {
-    this.goodsService.create(product);
+    this.goodsService.create(product)
+      .then(ret => {
+        this.results = ret;
+        if(ret.token.length != 0)
+          this.localStService.set('token',ret.token);
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
+  }
+
 }

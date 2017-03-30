@@ -8,6 +8,9 @@ import { SeedGood } from './SeedGood';
 import { SeedAddBasketQuery } from './SeedAddBasketQuery';
 import { SeedAnOrderItem } from './SeedAnOrderItem';
 import {SeedGoodListReply} from "./SeedGoodListReply";
+import {SeedBasketListReply} from "./SeedBasketListReply";
+import {SeedGenericReply} from "./SeedGenericReply";
+import {SeedGenericTokenReply} from "./SeedGenericTokenReply";
 
 @Injectable()
 export class GoodsService {
@@ -24,14 +27,12 @@ export class GoodsService {
     const url = `${this.productsUrl}/all`;
 
     let tok:string = this.localStService.get<string>('token');
-    if(tok.length == 64) {
       let mes: string = this.headers.get('X-Authorization');
       if (mes != null) {
         this.headers.set('X-Authorization', tok);
       } else {
         this.headers.append('X-Authorization', tok);
       }
-    }
 
     return this.http.get(url,{headers: this.headers})
                .toPromise()
@@ -43,25 +44,29 @@ export class GoodsService {
                .catch(this.handleError);
   }
 
-  create(product:  SeedGood): Promise<SeedAddBasketQuery> {
+  create(product:  SeedGood): Promise<SeedGenericTokenReply> {
     const url = `${this.basketUrl}/add`;
-    let item : SeedAnOrderItem = new SeedAnOrderItem("1",product.barcode,1,"0");
+
     let items : SeedAnOrderItem[] = [];
-    let basket = new SeedAddBasketQuery("1234567890",items);
+    let basket = new SeedAddBasketQuery(items);
+    let item : SeedAnOrderItem = new SeedAnOrderItem("1",product.barcode,1,"0");
     basket.products.push(item);
     let message :String = JSON.stringify(basket);
+
     let tok:string = this.localStService.get<string>('token');
-    let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
-    }
+      let mes: string = this.headers.get('X-Authorization');
+      if (mes != null) {
+        this.headers.set('X-Authorization', tok);
+      } else {
+        this.headers.append('X-Authorization', tok);
+      }
+
     return this.http.post(url,basket,{headers: this.headers})
       .toPromise()
       .then(response =>{
         console.log("ad basket create JSON: "+JSON.stringify(response.json()));
-        //response.json().users[0] as SeedUser;
+        let ret = Promise.resolve(response.json() as SeedGenericTokenReply);
+        return ret;
       })
       .catch(this.handleError);
   }
