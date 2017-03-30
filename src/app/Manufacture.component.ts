@@ -86,7 +86,7 @@ export class ManufactureComponent implements OnInit {
       })
       .catch((err:Response) => {
           this.errorHandler(err);
-        });
+      });
   }
 
   errorHandler(err:Response) {

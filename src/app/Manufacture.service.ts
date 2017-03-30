@@ -20,14 +20,12 @@ export class ManufactureService {
     const url = `${this.locationUrl}/all`;
 
     let tok:string = this.localStService.get<string>('token');
-    if(tok.length == 64) {
       let mes: string = this.headers.get('X-Authorization');
       if (mes != null) {
         this.headers.set('X-Authorization', tok);
       } else {
         this.headers.append('X-Authorization', tok);
       }
-    }
 
     let options = new RequestOptions({ headers: this.headers });
     return this.http.get(url, options)
