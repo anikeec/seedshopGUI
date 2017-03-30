@@ -47,7 +47,7 @@ export class DeliveryStatusService {
       this.headers.append('X-Authorization', tok);
     }
 
-    return this.http.get(url,{headers: this.headers})
+    return this.http.delete(url,{headers: this.headers})
       .toPromise()
       .then(response => {
         console.log("Delete DeliveryStatus JSON: " + JSON.stringify(response.json()));
@@ -73,7 +73,7 @@ export class DeliveryStatusService {
     } else {
       this.headers.append('X-Authorization', tok);
     }
-    
+
     return this.http.post(url,mess,{headers: this.headers})
       .toPromise()
       .then(response =>{

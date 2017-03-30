@@ -14,7 +14,7 @@ export class GoodsService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
   private productsUrl = 'https://localhost:8443/products';  // URL to web api
   private basketUrl = 'https://localhost:8443/basket';
-  private token:string;
+  private token:string = '';
   constructor(
         private http: Http,
         private localStService: LocalStorageService
@@ -22,13 +22,17 @@ export class GoodsService {
 
   getProducts(): Promise<SeedGoodListReply> {
     const url = `${this.productsUrl}/all`;
+
     let tok:string = this.localStService.get<string>('token');
-    let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
+    if(tok.length == 64) {
+      let mes: string = this.headers.get('X-Authorization');
+      if (mes != null) {
+        this.headers.set('X-Authorization', tok);
+      } else {
+        this.headers.append('X-Authorization', tok);
+      }
     }
+
     return this.http.get(url,{headers: this.headers})
                .toPromise()
                .then(response =>{

@@ -20,11 +20,13 @@ export class ProductService {
     const url = `${this.locationUrl}/all`;
 
     let tok:string = this.localStService.get<string>('token');
-    let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
+    if(tok.length == 64) {
+      let mes: string = this.headers.get('X-Authorization');
+      if (mes != null) {
+        this.headers.set('X-Authorization', tok);
+      } else {
+        this.headers.append('X-Authorization', tok);
+      }
     }
 
     return this.http.get(url, {headers: this.headers})
@@ -48,7 +50,7 @@ export class ProductService {
       this.headers.append('X-Authorization', tok);
     }
 
-    return this.http.get(url, {headers: this.headers})
+    return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(response => {
         console.log("Delete Product JSON: " + JSON.stringify(response.json()));

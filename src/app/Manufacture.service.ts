@@ -51,7 +51,7 @@ export class ManufactureService {
       this.headers.append('X-Authorization', tok);
     }
 
-    return this.http.get(url, { headers: this.headers })
+    return this.http.delete(url, { headers: this.headers })
       .toPromise()
       .then(response => {
         console.log("Delete product location JSON: " + JSON.stringify(response.json()));
