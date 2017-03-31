@@ -4,7 +4,6 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import {SeedInvoice} from "./SeedInvoice";
-import {SeedAddInvoiceQuery} from "./SeedAddInvoiceQuery";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
 import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
 import {LocalStorageService} from "angular-2-local-storage";
@@ -64,7 +63,7 @@ export class SeedInvoiceService {
   create(invoice:  SeedInvoice): Promise<SeedInvoiceListReply> {
     const url = `${this.invoiceUrl}/checkout`;
 
-    let mess : SeedAddInvoiceQuery = new SeedAddInvoiceQuery("1234567890",invoice);
+    let mess : SeedInvoice = invoice;
     let message :String = JSON.stringify(mess);
 
     let tok:string = this.localStService.get<string>('token');
