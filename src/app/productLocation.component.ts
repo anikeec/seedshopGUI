@@ -5,6 +5,7 @@ import {SeedProductLocation} from "./SeedProductLocation";
 import {ProductLocationService} from "./productLocation.service";
 import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
+import {Response} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -38,6 +39,9 @@ export class ProductLocationComponent implements OnInit {
         }
         return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   restore(id: number): void {
@@ -61,10 +65,25 @@ export class ProductLocationComponent implements OnInit {
         this.results = deleteRequestAnswer;
         return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   reload():void {
     this.productLocationService.getProductLocations()
-      .then(retPlocations => this.pLocationsList = retPlocations);
+      .then(retPlocations => {
+        this.pLocationsList = retPlocations;
+        this.results = retPlocations;
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
+  }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
   }
 }

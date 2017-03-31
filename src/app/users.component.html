@@ -1,4 +1,7 @@
-<h2>Seedshop users</h2>
+<h3>Seedshop users</h3>
+<br><a *ngIf="results.error_message">{{results.error_message}}</a>
+<br><a *ngIf="results.apiVer">API version: {{results.apiVer}}
+<br>
 <div>
   <table align="center" border="1" cellpadding="5">
     <tr>
@@ -45,3 +48,4 @@
     </tr>
   </table>
 </div>
+</a>

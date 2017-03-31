@@ -5,6 +5,7 @@ import {SeedPack} from "./SeedPack";
 import {PackService} from "./Pack.service";
 import {SeedPackListReply} from "./SeedPackListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
+import {Response} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -32,6 +33,9 @@ export class PackComponent implements OnInit {
         this.packNew.name = null;
         return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   restore(id: number): void {
@@ -46,10 +50,26 @@ export class PackComponent implements OnInit {
         this.results = deleteRequestAnswer;
         return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   reload():void {
     this.packService.getPacks()
-      .then(retPlocations => this.packList = retPlocations);
+      .then(retPacks => {
+        this.packList = retPacks;
+        this.results = retPacks;
+      })
+      .catch((err:Response) => {
+      this.errorHandler(err);
+      });
   }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
+  }
+
 }

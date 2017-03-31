@@ -2,7 +2,6 @@
 <br>API version: {{results.apiVer}}
 <br><br><a *ngIf="results.error_message">Error: {{results.error_message}}</a>
 <div class="grid grid-pad">
-  <a  *ngFor="let invoice of results.invoices">
   <form class="checkout_form" action="add.html" method="post" name="checkout_form"><!--onsubmit="return validate()"-->
     <ul>
       <li>
@@ -11,180 +10,138 @@
       </li>
       <li>
         <label for="orderId">Order id:</label>
-        <input type="text" name="orderId" #orderId disabled=true value="{{invoice.orderId?invoice.orderId:''}}">
+        <input type="text" name="orderId" disabled=true [(ngModel)]="invoiceTemp.orderId">
       </li>
       <li>
         <label for="userId">User id:</label>
-        <input type="text" name="userId" #userId value="{{invoice.userId?invoice.userId:''}}">
+        <input type="text" name="userId" [(ngModel)]="invoiceTemp.userId">
       </li>
       <li>
         <label for="orderDate">Order date:</label>
-        <input type="text" name="orderDate" #orderDate
-               pattern="\d{1,2}\.[0-1][0-9]\.\d{2,4}" required=""  value="{{invoice.orderDate?invoice.orderDate:''}}">
+        <input type="text" name="orderDate" pattern="\d{1,2}\.[0-1][0-9]\.\d{2,4}" required=""  [(ngModel)]="invoiceTemp.orderDate">
         <span class="form_hint">Proper format "15.01.2017"</span>
       </li>
       <li>
         <label for="paidDate">Paid date:</label>
-        <input type="text" name="paidDate" #paidDate
-               pattern="\d{1,2}\.[0-1][0-9]\.\d{2,4}" required=""  value="{{invoice.paidDate?invoice.paidDate:''}}">
+        <input type="text" name="paidDate" pattern="(\d{1,2}\.[0-1][0-9]\.\d{2,4})|[0-9]{,1}" [(ngModel)]="invoiceTemp.paidDate">
         <span class="form_hint">Proper format "15.01.2017"</span>
       </li>
       <li>
         <label for="sentDate">Sent date:</label>
-        <input type="text" name="sentDate" #sentDate
-               pattern="\d{1,2}\.[0-1][0-9]\.\d{2,4}" required=""  value="{{invoice.sentDate?invoice.sentDate:''}}">
+        <input type="text" name="sentDate" pattern="\d{1,2}\.[0-1][0-9]\.\d{2,4}" [(ngModel)]="invoiceTemp.sentDate">
         <span class="form_hint">Proper format "15.01.2017"</span>
       </li>
       <li>
         <label for="discount">Discount:</label>
-        <input type="text" name="discount" #discount
-               pattern="\d{1,2}\.\d{1,2}" required=""  value="{{invoice.discount?invoice.discount:''}}">
+        <input type="text" name="discount" pattern="\d{1,2}\.\d{1,2}" required=""  [(ngModel)]="invoiceTemp.discount">
       </li>
       <li>
         <label for="pay">Pay:</label>
-        <input type="text" name="pay" #pay
-               pattern="\d{1,2}\.\d{1,2}" required=""  value="{{invoice.pay?invoice.pay:''}}">
+        <input type="text" name="pay" pattern="\d{1,5}\.\d{1,2}" required="" [(ngModel)]="invoiceTemp.pay">
       </li>
       <li>
         <label for="secname">Surname:</label>
-        <input type="text" name="secName" #secName
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{invoice.secName?invoice.secName:''}}">
+        <input type="text" name="secName" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.secName">
       </li>
       <li>
         <label for="firstName">Name:</label>
-        <input type="text" name="firstName" #firstName
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{invoice.firstName?invoice.firstName:''}}">
+        <input type="text" name="firstName" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.firstName">
       </li>
       <li>
         <label for="thirdName">Third name:</label>
-        <input type="text" name="thirdName" #thirdName
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" value="{{invoice.thirdName?invoice.thirdName:''}}">
+        <input type="text" name="thirdName" pattern="[A-Za-zА-Яа-яЁё]{2,}" [(ngModel)]="invoiceTemp.thirdName">
       </li>
       <li>
         <label for="phone">Mobile phone:</label>
-        <input type="text" name="phone" #phone
-               pattern="\+380\d{9}" required=""  value="{{invoice.phone?invoice.phone:''}}">
-        <span class="form_hint">Proper format "+380631234567"</span>
+        <input type="text" name="phone" pattern="380\d{9}" required=""  [(ngModel)]="invoiceTemp.phone">
+        <span class="form_hint">Proper format "380631234567"</span>
       </li>
       <li>
         <label for="declaration">Declaration:</label>
-        <input type="text" name="declaration" #declaration
-               pattern="[A-Za-z0-9]{2,}" required="" value="{{invoice.declaration?invoice.declaration:''}}" >
+        <input type="text" name="declaration" pattern="[A-Za-z0-9]{2,}" [(ngModel)]="invoiceTemp.declaration">
       </li>
       <li>
         <label for="country">Country:</label>
-        <input type="text" name="country" #country placeholder="Ukraine"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required=""  value="{{invoice.country?invoice.country:''}}">
+        <input type="text" name="country" placeholder="Ukraine" pattern="[A-Za-zА-Яа-яЁё]{2,}" required=""  [(ngModel)]="invoiceTemp.country">
       </li>
       <li>
         <label for="region">Region:</label>
-        <input type="text" name="region" #region value="{{invoice.region?invoice.region:''}}">
+        <input type="text" name="region" [(ngModel)]="invoiceTemp.region">
       </li>
       <li>
         <label for="area">Area:</label>
-        <input type="text" name="area" #area  value="{{invoice.area?invoice.area:''}}">
+        <input type="text" name="area" [(ngModel)]="invoiceTemp.area">
       </li>
       <li>
         <label for="city">City:</label>
-        <input type="text" name="city" #city  value="{{invoice.city?invoice.city:''}}"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="city" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.city">
       </li>
 
       <li>
         <label for="delivery">Delivery:</label>
-        <select #delivery name="delivery">
+        <select name="delivery" [(ngModel)]="invoiceTemp.delivery">
           <option *ngFor="let dservice of deliveryServices.deliveryServices" value="{{dservice.deliveryId}}"
-                  [selected] = "invoice.delivery == dservice.deliveryId? true : ''">{{dservice.name}}</option>
+                  [selected] = "invoiceTemp.delivery == dservice.deliveryId? true : ''">{{dservice.name}}</option>
         </select>
       </li>
 
       <li>
         <label for="deliveryOffice">Delivery office:</label>
-        <input type="text" name="deliveryOffice" #deliveryOffice
-               pattern="\d{1,3}" required=""  value="{{invoice.deliveryOffice?invoice.deliveryOffice:''}}">
+        <input type="text" name="deliveryOffice" pattern="\d{1,3}"  value="{{invoiceTemp.deliveryOffice?invoiceTemp.deliveryOffice:''}}" [(ngModel)]="invoiceTemp.deliveryOffice">
       </li>
       <li>
         <label for="prepayment">Prepayment:</label>
-        <select #prepayment name="prepayment">
-          <option value="true"  [selected] = "invoice.prepayment == 'true'? true : ''">Yes</option>
-          <option value="false" [selected] = "invoice.prepayment == 'false'? true : ''">No</option>
+        <select name="prepayment" [(ngModel)]="invoiceTemp.prepayment">
+          <option value="true"  [selected] = "invoiceTemp.prepayment == 'true'">Yes</option>
+          <option value="false" [selected] = "invoiceTemp.prepayment == 'false'">No</option>
         </select>
       </li>
-
       <li>
         <label for="status">Status:</label>
-        <select name="status">
+        <select name="status" [(ngModel)]="invoiceTemp.status">
           <option *ngFor="let dstatus of deliveryStatuses.deliveryStatuses" value="{{dstatus.statusId}}"
-                  [selected] = "invoice.name == dstatus.statusId? true : ''">{{dstatus.name}}</option>
+                  [selected] = "invoiceTemp.name == dstatus.statusId? true : ''">{{dstatus.name}}</option>
         </select>
       </li>
-
       <li>
         <label for="sourceL">sourceL:</label>
-        <select #sourceL name="sourceL">
+        <select name="sourceL" [(ngModel)]="invoiceTemp.sourceL">
           <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
-                  [selected] = "invoice.sourceL == plocation.locationId? true : ''">{{plocation.name}}</option>
+                  [selected] = "invoiceTemp.sourceL === plocation.locationId">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="destL">destL:</label>
-        <select #destL name="destL">
+        <select name="destL" [(ngModel)]="invoiceTemp.destL">
           <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
-                  [selected] = "invoice.destL == plocation.locationId? true : ''">{{plocation.name}}</option>
+                  [selected] = "invoiceTemp.destL === plocation.locationId">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="currL">currL:</label>
-        <select #currL name="currL">
+        <select name="currL" [(ngModel)]="invoiceTemp.currL">
           <option *ngFor="let plocation of productLocations.pLocations" value="{{plocation.locationId}}"
-                  [selected] = "invoice.currL == plocation.locationId? true : ''">{{plocation.name}}</option>
+                  [selected] = "invoiceTemp.currL === plocation.locationId">{{plocation.name}}</option>
         </select>
       </li>
       <li>
         <label for="backorderId">Backorder id:</label>
-        <input type="text" name="backorderId" #backorderId value="{{invoice.backorderId?invoice.backorderId:''}}">
+        <input type="text" name="backorderId" value="{{invoiceTemp.backorderId?invoiceTemp.backorderId:''}}" [(ngModel)]="invoiceTemp.backorderId">
       </li>
       <li>
         <label for="addInfoM">Add manager's info:</label>
-        <textarea rows="5" cols="20" name="addInfoM">{{invoice.addInfoM?invoice.addInfoM:''}}</textarea>
+        <textarea rows="5" cols="20" name="addInfoM" [(ngModel)]="invoiceTemp.addInfoM">{{invoiceTemp.addInfoM?invoiceTemp.addInfoM:''}}</textarea>
       </li>
       <li>
         <label for="addInfoU">Add user's info:</label>
-        <textarea rows="5" cols="20" name="addInfoU">{{invoice.addInfoU?invoice.addInfoU:''}}</textarea>
+        <textarea rows="5" cols="20" name="addInfoU" [(ngModel)]="invoiceTemp.addInfoU">{{invoiceTemp.addInfoU?invoiceTemp.addInfoU:''}}</textarea>
       </li>
 
       <li>
         <button class="submit" type="submit"
-                (click)="sendInvoiceDetail(userId.value,
-                                            orderId.value,
-                                            userId.value,
-                                            orderDate.value,
-                                            paidDate.value,
-                                            sentDate.value,
-                                            discount.value,
-                                            pay.value,
-                                            secName.value,
-                                            firstName.value,
-                                            thirdName.value,
-                                            phone.value,
-                                            declaration.value,
-                                            country.value,
-                                            region.value,
-                                            area.value,
-                                            city.value,
-                                            delivery.value,
-                                            deliveryOffice.value,
-                                            prepayment.value,
-                                            name.value,
-                                            sourceL.value,
-                                            destL.value,
-                                            currL.value,
-                                            backorderId.value,
-                                            addInfoU.value,
-                                            addInfoM.value);"
+                (click)="sendInvoiceDetail();"
         >Save changes</button>
       </li>
     </ul>
   </form>
-  </a>
 </div>

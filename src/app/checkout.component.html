@@ -10,74 +10,50 @@
       </li>
       <li>
         <label for="secname">Surname:</label>
-        <input type="text" name="secName" #secName placeholder="Petrov"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="secName" placeholder="Petrov" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.secName">
       </li>
       <li>
         <label for="firstName">Name:</label>
-        <input type="text" name="firstName" #firstName placeholder="Peter"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="firstName" placeholder="Peter" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.firstName">
       </li>
       <li>
         <label for="thirdName">Third name:</label>
-        <input type="text" name="thirdName" #thirdName placeholder="Petrovich"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="thirdName" placeholder="Petrovich" pattern="[A-Za-zА-Яа-яЁё]{2,}" [(ngModel)]="invoiceTemp.thirdName">
       </li>
       <li>
         <label for="phone">Mobile phone:</label>
-        <input type="text" name="phone" #phone placeholder="+380631234567"
-               pattern="\+380\d{9}" required="">
-        <span class="form_hint">Proper format "+380631234567"</span>
-      </li>
-      <li>
-        <label for="email">E-mail:</label>
-        <input type="email" name="email" #email placeholder="mailbox@ukr.net"
-               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"  required="">
-        <span class="form_hint">Proper format "mailbox@ukr.net"</span>
+        <input type="text" name="phone" placeholder="380631234567" pattern="380\d{9}" required="" [(ngModel)]="invoiceTemp.phone">
+        <span class="form_hint">Proper format "380631234567"</span>
       </li>
       <li>
         <label for="country">Country:</label>
-        <input type="text" name="country" #country placeholder="Ukraine"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="country" placeholder="Ukraine" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.country">
       </li>
       <li>
         <label for="region">Region:</label>
-        <input type="text" name="region" #region placeholder="Chernigivska obl.">
+        <input type="text" name="region" placeholder="Chernigivska obl." [(ngModel)]="invoiceTemp.region">
       </li>
       <li>
         <label for="area">Area:</label>
-        <input type="text" name="area" #area placeholder="Chernigivskiy rayon">
+        <input type="text" name="area" placeholder="Chernigivskiy rayon" [(ngModel)]="invoiceTemp.area">
       </li>
       <li>
         <label for="city">City:</label>
-        <input type="text" name="city" #city placeholder="Chernigiv"
-               pattern="[A-Za-zА-Яа-яЁё]{2,}" required="">
+        <input type="text" name="city" placeholder="Chernigiv" pattern="[A-Za-zА-Яа-яЁё]{2,}" required="" [(ngModel)]="invoiceTemp.city">
       </li>
       <li>
         <label for="deliveryService">Delivery service:</label>
-        <select #deliveryService>
-          <option value="1">Self-pickup</option>
-          <option value="2">Nova poshta</option>
+        <select name="delivery" [(ngModel)]="invoiceTemp.delivery">
+          <option *ngFor="let dservice of deliveryServices.deliveryServices" value="{{dservice.deliveryId}}">{{dservice.name}}</option>
         </select>
       </li>
       <li>
         <label for="deliveryOffice">Delivery office:</label>
-        <input type="text" name="deliveryOffice" #deliveryOffice placeholder="3"
-               pattern="[0-9]{1,}">
+        <input type="text" name="deliveryOffice" placeholder="3" pattern="[0-9]{1,}" [(ngModel)]="invoiceTemp.deliveryOffice">
       </li>
       <li>
         <button class="submit" type="submit"
-                (click)="sendInvoice(secName.value,
-                                      firstName.value,
-                                      thirdName.value,
-                                      email.value,
-                                      phone.value,
-                                      country.value,
-                                      region.value,
-                                      area.value,
-                                      city.value,
-                                      deliveryService.value,
-                                      deliveryOffice.value);"
+                (click)="sendInvoice();"
         >Send invoice</button>
       </li>
     </ul>
