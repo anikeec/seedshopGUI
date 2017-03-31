@@ -23,6 +23,7 @@ export class InvoiceDetailComponent implements OnInit {
   deliveryStatuses: SeedDeliveryStatusListReply = new SeedDeliveryStatusListReply();
   productLocations: SeedProductLocationListReply = new SeedProductLocationListReply();
   deliveryServices: SeedDeliveryServiceListReply = new SeedDeliveryServiceListReply();
+  invoiceTemp: SeedInvoice = new SeedInvoice();
   //invoice: SeedInvoice = new SeedInvoice();
   invoiceId: number = 0;
 
@@ -66,82 +67,56 @@ export class InvoiceDetailComponent implements OnInit {
 
             .then(ret => {
                 this.results = ret;
+                this.invoiceTemp = ret.invoices[0];
               }
             )
       })
 
   }
 
-  sendInvoiceDetail(orderId: string,
-                    userId: string,
-                    orderDate: String,
-                    paidDate: String,
-                    sentDate: String,
-                    discount: String,
-                    pay: String,
-                    secName: String,
-                    firstName: String,
-                    thirdName: String,
-                    phone: String,
-                    declaration: String,
-                    country: String,
-                    region: String,
-                    area: String,
-                    city: String,
-                    delivery: number,
-                    deliveryOffice: number,
-                    prepayment: String,
-                    status: number,
-                    sourceL: number,
-                    destL: number,
-                    currL: number,
-                    backorderId: string,
-                    addInfoU: String,
-                    addInfoM: String):void{
-    if(secName.length >20)
-      secName = secName.substr(0,20);
+  sendInvoiceDetail():void{
+    if(this.invoiceTemp.secName.length >20)
+      this.invoiceTemp.secName = this.invoiceTemp.secName.substr(0,20);
 
     let invoice : SeedInvoice = new SeedInvoice();
-    invoice.orderId = orderId;
-    invoice.userId = userId;
-    invoice.orderDate = orderDate;
-    invoice.paidDate = paidDate;
-    invoice.sentDate = sentDate;
-    invoice.discount = discount;
-    invoice.pay = pay;
-    invoice.secName = secName;
-    invoice.firstName = firstName;
-    invoice.thirdName = thirdName;
-    invoice.phone = phone;
-    invoice.declaration = declaration;
-    invoice.country = country;
-    invoice.region = region;
-    invoice.area = area;
-    invoice.city = city;
-    invoice.delivery = delivery;
-    invoice.deliveryOffice = deliveryOffice;
-    invoice.prepayment = prepayment;
-    invoice.status = status;
-    invoice.sourceL = sourceL;
-    invoice.destL = destL;
-    invoice.currL = currL;
-    invoice.backorderId = backorderId;
-    invoice.addInfoU = addInfoU;
-    invoice.addInfoM = addInfoM;
+    invoice.orderId = this.invoiceTemp.orderId;
+    invoice.userId = this.invoiceTemp.userId;
+    invoice.orderDate = this.invoiceTemp.orderDate;
+    invoice.paidDate = this.invoiceTemp.paidDate;
+    invoice.sentDate = this.invoiceTemp.sentDate;
+    invoice.discount = this.invoiceTemp.discount;
+    invoice.pay = this.invoiceTemp.pay;
+    invoice.secName = this.invoiceTemp.secName;
+    invoice.firstName = this.invoiceTemp.firstName;
+    invoice.thirdName = this.invoiceTemp.thirdName;
+    invoice.phone = this.invoiceTemp.phone;
+    invoice.declaration = this.invoiceTemp.declaration;
+    invoice.country = this.invoiceTemp.country;
+    invoice.region = this.invoiceTemp.region;
+    invoice.area = this.invoiceTemp.area;
+    invoice.city = this.invoiceTemp.city;
+    invoice.delivery = this.invoiceTemp.delivery;
+    invoice.deliveryOffice = this.invoiceTemp.deliveryOffice;
+    invoice.prepayment = this.invoiceTemp.prepayment;
+    invoice.status = this.invoiceTemp.status;
+    invoice.sourceL = this.invoiceTemp.sourceL;
+    invoice.destL = this.invoiceTemp.destL;
+    invoice.currL = this.invoiceTemp.currL;
+    invoice.backorderId = this.invoiceTemp.backorderId;
+    invoice.addInfoU = this.invoiceTemp.addInfoU;
+    invoice.addInfoM = this.invoiceTemp.addInfoM;
 
 
-/*
-    this.seedinvoiceService.create(invoice)
+    this.invoiceService.create(invoice)
       .then(ret => {
       this.results = ret;
       if(ret.retcode == 0) {
-        this.router.navigate(['/checkoutResult']);
+        this.router.navigate(['/invoice']);
 
       }})
       .catch(error => {
       }
     );
-    */
   }
 
 }
