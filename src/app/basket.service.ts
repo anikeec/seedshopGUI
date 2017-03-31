@@ -9,7 +9,6 @@ import {LocalStorageService} from "angular-2-local-storage";
 @Injectable()
 export class SeedBasketService {
   private headers = new Headers({'Content-Type': 'application/json; charset=utf8' });
-  private sessionId : String = "1234567890";
   private basketUrl = 'https://localhost:8443/basket';
   private token:string;
   constructor(
@@ -18,7 +17,7 @@ export class SeedBasketService {
   ) { }
 
   getAnOrders(): Promise<SeedBasketItem[]> {
-    const url = `${this.basketUrl}/all/` + this.sessionId;
+    const url = `${this.basketUrl}/all`;
 
     let tok:string = this.localStService.get<string>('token');
       let mes: string = this.headers.get('X-Authorization');
