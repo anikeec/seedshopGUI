@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { SeedBasketItem } from './SeedBasketItem';
 import {LocalStorageService} from "angular-2-local-storage";
+import {SeedGenericReply} from "./SeedGenericReply";
 
 @Injectable()
 export class SeedBasketService {
@@ -34,6 +35,27 @@ export class SeedBasketService {
                  return Promise.resolve(response.json().basketItems as SeedBasketItem[]);
                })
                .catch(this.handleError);
+  }
+
+  delete(id: string): Promise<SeedGenericReply> {
+    const url = `${this.basketUrl}/del/order/${id}`;
+
+    let tok:string = this.localStService.get<string>('token');
+    let mes:string = this.headers.get('X-Authorization');
+    if(mes != null) {
+      this.headers.set('X-Authorization',tok);
+    } else {
+      this.headers.append('X-Authorization', tok);
+    }
+
+    return this.http.delete(url, { headers: this.headers })
+      .toPromise()
+      .then(response => {
+        console.log("Delete basket JSON: " + JSON.stringify(response.json()));
+        let deleteRequestAnswer = response.json() as SeedGenericReply;
+        return deleteRequestAnswer;
+      })
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

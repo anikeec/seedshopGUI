@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { SeedBasketService } from './basket.service';
 import { SeedBasketItem } from './SeedBasketItem';
+import {Response} from "@angular/http";
+import {SeedGenericReply} from "./SeedGenericReply";
 
 @Component({
   moduleId: module.id,
@@ -11,6 +13,7 @@ import { SeedBasketItem } from './SeedBasketItem';
 })
 export class BasketComponent implements OnInit {
   basketItems: SeedBasketItem[] = [];
+  results: SeedGenericReply = new SeedGenericReply();
 
   constructor(private seedbasketService: SeedBasketService) { }
 
@@ -46,5 +49,32 @@ export class BasketComponent implements OnInit {
 
   counterResult():number {
     return this.quentity;
+  }
+
+  delete(id: string): void {
+    this.seedbasketService.delete(id)
+      .then(deleteRequestAnswer => {
+        this.results = deleteRequestAnswer;
+        return this.reload();
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
+  }
+
+  reload():void {
+    this.seedbasketService.getAnOrders()
+      .then(basketItems => {
+        this.basketItems = basketItems;
+      })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
+  }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
   }
 }
