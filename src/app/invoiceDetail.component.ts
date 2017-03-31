@@ -9,6 +9,7 @@ import {SeedProductLocationListReply} from "./SeedProductLocationListReply";
 import {SeedDeliveryServiceService} from "./deliveryservice.service";
 import {SeedDeliveryServiceListReply} from "./SeedDeliveryServiceListReply";
 import {DeliveryStatusService} from "./DeliveryStatus.service";
+import {SeedGenericReply} from "./SeedGenericReply";
 
 
 @Component({
@@ -19,7 +20,7 @@ import {DeliveryStatusService} from "./DeliveryStatus.service";
 })
 export class InvoiceDetailComponent implements OnInit {
 
-  results: SeedInvoiceListReply = new SeedInvoiceListReply();
+  results: SeedGenericReply = new SeedGenericReply();
   deliveryStatuses: SeedDeliveryStatusListReply = new SeedDeliveryStatusListReply();
   productLocations: SeedProductLocationListReply = new SeedProductLocationListReply();
   deliveryServices: SeedDeliveryServiceListReply = new SeedDeliveryServiceListReply();

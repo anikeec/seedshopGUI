@@ -5,8 +5,8 @@ import 'rxjs/add/operator/toPromise';
 
 import {SeedInvoice} from "./SeedInvoice";
 import {SeedInvoiceListReply} from "./SeedInvoiceListReply";
-import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
 import {LocalStorageService} from "angular-2-local-storage";
+import {SeedGenericReply} from "./SeedGenericReply";
 
 @Injectable()
 export class SeedInvoiceService {
@@ -60,7 +60,7 @@ export class SeedInvoiceService {
       .catch(this.handleError);
   }
 
-  create(invoice:  SeedInvoice): Promise<SeedInvoiceListReply> {
+  create(invoice:  SeedInvoice): Promise<SeedGenericReply> {
     const url = `${this.invoiceUrl}/checkout`;
 
     let mess : SeedInvoice = invoice;
@@ -78,7 +78,7 @@ export class SeedInvoiceService {
       .toPromise()
       .then(response =>{
         console.log("update invoice JSON: "+JSON.stringify(response.json()));
-        let ret = Promise.resolve(response.json() as SeedInvoiceListReply);
+        let ret = Promise.resolve(response.json() as SeedGenericReply);
         return ret;
       })
       .catch(this.handleError);
