@@ -21,7 +21,7 @@ export class SeedInvoiceService {
   ) { }
 
   getInvoices(): Promise<SeedInvoice[]> {
-    const url = `${this.invoiceUrl}/all`;
+    const url = `${this.invoiceUrl}/byuser`;//all
 
     let tok:string = this.localStService.get<string>('token');
     let mes:string = this.headers.get('X-Authorization');
