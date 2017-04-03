@@ -19,9 +19,11 @@ export class DeliveryStatusService {
 
   getDeliveryStatuses(): Promise<SeedDeliveryStatusListReply> {
     const url = `${this.dstatusUrl}/all`;
+
     let tok:string = this.localStService.get<string>('token');
     let mes:string = this.headers.get('X-Authorization');
     this.headers.set('X-Authorization',tok);
+
     return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(response => {
@@ -37,11 +39,7 @@ export class DeliveryStatusService {
 
     let tok:string = this.localStService.get<string>('token');
     let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
-    }
+    this.headers.set('X-Authorization',tok);
 
     return this.http.delete(url,{headers: this.headers})
       .toPromise()
@@ -64,11 +62,7 @@ export class DeliveryStatusService {
 
     let tok:string = this.localStService.get<string>('token');
     let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
-    }
+    this.headers.set('X-Authorization',tok);
 
     return this.http.post(url,mess,{headers: this.headers})
       .toPromise()

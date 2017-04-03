@@ -27,12 +27,8 @@ export class GoodsService {
     const url = `${this.productsUrl}/all`;
 
     let tok:string = this.localStService.get<string>('token');
-      let mes: string = this.headers.get('X-Authorization');
-      if (mes != null) {
-        this.headers.set('X-Authorization', tok);
-      } else {
-        this.headers.append('X-Authorization', tok);
-      }
+    let mes: string = this.headers.get('X-Authorization');
+    this.headers.set('X-Authorization', tok);
 
     return this.http.get(url,{headers: this.headers})
                .toPromise()
@@ -54,12 +50,8 @@ export class GoodsService {
     let message :String = JSON.stringify(basket);
 
     let tok:string = this.localStService.get<string>('token');
-      let mes: string = this.headers.get('X-Authorization');
-      if (mes != null) {
-        this.headers.set('X-Authorization', tok);
-      } else {
-        this.headers.append('X-Authorization', tok);
-      }
+    let mes: string = this.headers.get('X-Authorization');
+    this.headers.set('X-Authorization', tok);
 
     return this.http.post(url,basket,{headers: this.headers})
       .toPromise()

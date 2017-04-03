@@ -19,11 +19,7 @@ export class SeedDeliveryServiceService {
 
     let tok:string = this.localStService.get<string>('token');
     let mes:string = this.headers.get('X-Authorization');
-    if(mes != null) {
-      this.headers.set('X-Authorization',tok);
-    } else {
-      this.headers.append('X-Authorization', tok);
-    }
+    this.headers.set('X-Authorization',tok);
 
     return this.http.get(url, {headers: this.headers})
       .toPromise()
