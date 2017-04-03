@@ -11,6 +11,7 @@ import {SeedManufactureListReply} from "./SeedManufactureListReply";
 import {SeedPackListReply} from "./SeedPackListReply";
 import {ManufactureService} from "./Manufacture.service";
 import {PackService} from "./Pack.service";
+import {Response} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -45,7 +46,10 @@ export class ProductComponent implements OnInit {
         return this.productService.getProducts();
       })
 
-      .then(retProducts => this.productList = retProducts);
+      .then(retProducts => {
+        this.productList = retProducts;
+        this.results = retProducts;
+      });
   }
 
   add(): void {
@@ -59,9 +63,12 @@ export class ProductComponent implements OnInit {
         if(rep.retcode == 0) {
           product.barcode = null;
           product.price = null;
+		  return this.reload();
         }
-        return this.reload();
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
 }
 
   restore(barcode: string): void {
@@ -84,13 +91,31 @@ export class ProductComponent implements OnInit {
     this.productService.delete(barcode)
       .then(deleteRequestAnswer => {
         this.results = deleteRequestAnswer;
+		if(deleteRequestAnswer.retcode == 0) {
         return this.reload();
+		}
       })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
   }
 
   reload():void {
     this.productService.getProducts()
-      .then(retPlocations => this.productList = retPlocations);
+      .then(retPlocations => {
+	  this.productList = retPlocations;
+	  this.results = retPlocations;
+	  })
+      .catch((err:Response) => {
+        this.errorHandler(err);
+      });
+  }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.apiVer = null;
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
   }
 
 }

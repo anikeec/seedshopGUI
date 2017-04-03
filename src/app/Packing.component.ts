@@ -31,7 +31,10 @@ export class PackingComponent implements OnInit {
         return this.packingService.getPackings()
       })
 
-      .then(retPackings => this.packingList = retPackings);
+      .then(retPackings => {
+        this.packingList = retPackings;
+        this.results = retPackings;
+      });
   }
 
   add(): void {
@@ -46,7 +49,9 @@ export class PackingComponent implements OnInit {
         this.packingNew.packId = null;
         this.packingNew.weight = null;
         this.packingNew.amount = null;
+		if(rep.retcode == 0) {
         return this.reload();
+		}
       })
       .catch((err:Response) => {
         this.errorHandler(err);
@@ -74,7 +79,9 @@ export class PackingComponent implements OnInit {
     this.packingService.delete(id)
       .then(deleteRequestAnswer => {
         this.results = deleteRequestAnswer;
+		if(deleteRequestAnswer.retcode == 0) {
         return this.reload();
+		}
       })
       .catch((err:Response) => {
         this.errorHandler(err);
@@ -94,6 +101,7 @@ export class PackingComponent implements OnInit {
 
   errorHandler(err:Response) {
     if(err.status == 401) {
+      this.results.apiVer = null;
       this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
     }
   }

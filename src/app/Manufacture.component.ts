@@ -91,6 +91,7 @@ export class ManufactureComponent implements OnInit {
 
   errorHandler(err:Response) {
     if(err.status == 401) {
+      this.results.apiVer = null;
       this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
     }
   }

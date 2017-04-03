@@ -5,6 +5,7 @@ import {SeedDeliveryStatus} from "./SeedDeliveryStatus";
 import {DeliveryStatusService} from "./DeliveryStatus.service";
 import {SeedDeliveryStatusListReply} from "./SeedDeliveryStatusListReply";
 import {SeedGenericReply} from "./SeedGenericReply";
+import {Response} from "@angular/http";
 
 @Component({
   moduleId: module.id,
@@ -21,7 +22,13 @@ export class DeliveryStatusComponent implements OnInit {
 
   ngOnInit(): void {
     this.deliveryStatusService.getDeliveryStatuses()
-      .then(retDeliveryStatuses => this.deliveryStatusList = retDeliveryStatuses);
+      .then(retDeliveryStatuses => {
+        this.deliveryStatusList = retDeliveryStatuses;
+        this.results = retDeliveryStatuses;
+      })
+	  .catch((err:Response) => {
+          this.errorHandler(err);
+      });
   }
 
   add(): void {
@@ -35,9 +42,12 @@ export class DeliveryStatusComponent implements OnInit {
         if(rep.retcode == 0) {
           dstatus.statusId = null;
           dstatus.name = null;
+		      return this.reload();
         }
-        return this.reload();
       })
+	  .catch((err:Response) => {
+          this.errorHandler(err);
+      });
   }
 
   restore(id: number): void {
@@ -59,12 +69,31 @@ export class DeliveryStatusComponent implements OnInit {
     this.deliveryStatusService.delete(id)
       .then(deleteRequestAnswer => {
         this.results = deleteRequestAnswer;
-        return this.reload();
+        if(deleteRequestAnswer.retcode == 0) {
+          return this.reload();
+        }
       })
+	  .catch((err:Response) => {
+          this.errorHandler(err);
+      });
   }
 
   reload():void {
     this.deliveryStatusService.getDeliveryStatuses()
-      .then(retDeliveryStatuses => this.deliveryStatusList = retDeliveryStatuses);
+      .then(retDeliveryStatuses => {
+        this.deliveryStatusList = retDeliveryStatuses;
+        this.results = retDeliveryStatuses;
+      })
+	  .catch((err:Response) => {
+          this.errorHandler(err);
+      });
   }
+
+  errorHandler(err:Response) {
+    if(err.status == 401) {
+      this.results.apiVer = null;
+      this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
+    }
+  }
+
 }

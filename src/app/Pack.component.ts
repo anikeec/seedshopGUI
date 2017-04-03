@@ -22,16 +22,21 @@ export class PackComponent implements OnInit {
 
   ngOnInit(): void {
     this.packService.getPacks()
-      .then(retPacks => this.packList = retPacks);
+      .then(retPacks => {
+        this.packList = retPacks;
+        this.results = retPacks;
+      });
   }
 
   add(): void {
     this.packService.create(this.packNew)
       .then(rep => {
         this.results = rep;
+		if(rep.retcode == 0) {
         this.packNew.packId = null;
         this.packNew.name = null;
         return this.reload();
+		}
       })
       .catch((err:Response) => {
         this.errorHandler(err);
@@ -47,8 +52,10 @@ export class PackComponent implements OnInit {
   delete(id: number): void {
     this.packService.delete(id)
       .then(deleteRequestAnswer => {
-        this.results = deleteRequestAnswer;
+	  this.results = deleteRequestAnswer;
+	  if(deleteRequestAnswer.retcode == 0) {
         return this.reload();
+		}
       })
       .catch((err:Response) => {
         this.errorHandler(err);
@@ -68,6 +75,7 @@ export class PackComponent implements OnInit {
 
   errorHandler(err:Response) {
     if(err.status == 401) {
+      this.results.apiVer = null;
       this.results.error_message = 'You have not access to this function. Please enter Login and Password.'
     }
   }
